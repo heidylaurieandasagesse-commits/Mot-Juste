@@ -1,412 +1,548 @@
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="MOT JUSTE : lire, comprendre et explorer les nuances de la langue française.">
-    <title>MOT JUSTE — Lire, comprendre, explorer</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="app.js" defer></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#173d35">
+<title>MOT JUSTE — Espace de travail</title>
+<style>
+:root{--bg:#f5f7f4;--panel:#fff;--ink:#182b27;--muted:#64736e;--line:#dce5df;--green:#1c5a4a;--green2:#e4f2eb;--gold:#d4a85d;--danger:#a33b3b;--shadow:0 8px 26px #183d3510}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}button,input,select,textarea{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid #9bcab6;outline-offset:2px}
+.app{display:grid;grid-template-columns:260px minmax(0,1fr);min-height:100vh}.sidebar{background:#173d35;color:#f4fbf7;padding:22px 16px;display:flex;flex-direction:column;gap:22px}.brand{display:flex;align-items:center;gap:11px;padding:4px 8px}.brandmark{width:43px;height:43px;border-radius:14px;background:#e6c78c;color:#173d35;display:grid;place-items:center;font-size:22px;font-weight:900}.brand h1{font-size:19px;letter-spacing:.04em;margin:0}.brand small{display:block;color:#bdd3c9;font-size:12px}.nav{display:grid;gap:5px}.nav button{border:0;text-align:left;color:#d9e8e1;background:transparent;border-radius:11px;padding:11px 12px;display:flex;gap:11px;align-items:center}.nav button:hover,.nav button.active{background:#ffffff18;color:#fff}.nav .ico{width:22px;text-align:center}.side-note{margin-top:auto;border:1px solid #ffffff2c;border-radius:13px;padding:13px;color:#d2e2da;font-size:12px}.side-note strong{color:white;display:block;margin-bottom:4px}.main{min-width:0}.topbar{padding:18px clamp(16px,4vw,42px);background:#ffffffd9;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:12px;position:sticky;top:0;z-index:3;backdrop-filter:blur(12px)}.topbar .crumb{font-size:13px;color:var(--muted)}.topbar h2{font-size:20px;margin:2px 0 0}.top-actions{display:flex;align-items:center;gap:8px}.avatar{width:38px;height:38px;border-radius:50%;background:var(--green2);color:var(--green);display:grid;place-items:center;font-weight:800}.content{padding:clamp(16px,4vw,42px);max-width:1300px;margin:auto}.page{display:none}.page.active{display:block}.eyebrow{text-transform:uppercase;letter-spacing:.12em;font-size:11px;font-weight:800;color:var(--green)}h1,h2,h3,p{margin-top:0}h1{font-size:clamp(28px,4vw,42px);line-height:1.12;letter-spacing:-.04em;margin-bottom:12px}h2{font-size:25px;letter-spacing:-.025em}h3{font-size:17px;margin-bottom:8px}.muted{color:var(--muted)}.hero{padding:clamp(24px,5vw,48px);border-radius:24px;background:linear-gradient(125deg,#e5f1e9,#f8f0dd);display:grid;grid-template-columns:minmax(0,1.35fr) minmax(180px,.65fr);gap:22px;align-items:center;margin-bottom:24px}.hero p{max-width:620px;color:#4e625a}.hero-mark{font-size:clamp(76px,12vw,132px);text-align:center;filter:drop-shadow(0 12px 12px #315f4720)}.button{border:1px solid var(--line);border-radius:10px;padding:10px 14px;background:white;color:var(--ink);font-weight:650}.button:hover{border-color:#8aafa0}.button.primary{background:var(--green);color:white;border-color:var(--green)}.button.soft{background:var(--green2);border-color:transparent;color:var(--green)}.button.danger{color:var(--danger)}.button.small{padding:7px 10px;font-size:13px}.button:disabled{opacity:.45;cursor:not-allowed}.row{display:flex;align-items:center;gap:9px;flex-wrap:wrap}.spread{justify-content:space-between}.grid{display:grid;gap:16px}.grid.cards{grid-template-columns:repeat(3,minmax(0,1fr))}.grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}.card{background:var(--panel);border:1px solid var(--line);border-radius:17px;padding:20px;box-shadow:var(--shadow);min-width:0}.card p:last-child{margin-bottom:0}.category-card{display:flex;gap:13px;align-items:flex-start;text-align:left;width:100%;border:1px solid var(--line);background:white;border-radius:15px;padding:16px;color:var(--ink);height:100%}.category-card:hover{border-color:#76a591;transform:translateY(-1px)}.category-card .symbol{width:43px;height:43px;border-radius:13px;background:var(--green2);display:grid;place-items:center;font-size:21px;flex:none}.category-card strong{display:block;margin-bottom:4px}.category-card small{color:var(--muted);line-height:1.4;display:block}.field{display:grid;gap:6px;margin:12px 0}.field label{font-size:13px;font-weight:750}.field input,.field select,.field textarea,input,select,textarea{width:100%;border:1px solid var(--line);border-radius:10px;padding:11px 12px;background:#fff;color:var(--ink)}textarea{resize:vertical;min-height:100px}.field textarea{min-height:100px}.chat-shell{display:grid;grid-template-columns:minmax(0,1fr) 270px;gap:18px;align-items:start}.chat-card{padding:0;overflow:hidden}.chat-head{padding:17px 20px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:10px;align-items:center}.chat-messages{padding:20px;min-height:260px;max-height:58vh;overflow:auto;display:flex;flex-direction:column;gap:15px}.bubble{max-width:92%;border-radius:15px;padding:13px 15px;white-space:pre-wrap;overflow-wrap:anywhere}.bubble.user{background:var(--green);color:white;align-self:flex-end;border-bottom-right-radius:4px}.bubble.assistant{background:#f0f4f1;align-self:flex-start;border-bottom-left-radius:4px}.bubble .bubble-tools{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}.bubble .bubble-tools button{font-size:12px;padding:5px 8px}.chat-compose{border-top:1px solid var(--line);padding:15px;display:grid;gap:10px}.chat-compose textarea{min-height:95px}.compose-bottom{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}.chat-aside{display:grid;gap:13px}.pill{display:inline-flex;border-radius:99px;background:var(--green2);color:var(--green);font-size:12px;padding:5px 9px;font-weight:700}.hint{background:#fff8e8;border:1px solid #f0dfb7;color:#6d582b;border-radius:12px;padding:12px;font-size:13px}.list{display:grid;gap:10px}.list-item{border:1px solid var(--line);background:#fff;border-radius:12px;padding:14px;display:flex;gap:12px;align-items:flex-start;justify-content:space-between}.list-item .item-main{min-width:0;flex:1}.list-item h3{margin:0 0 4px;overflow-wrap:anywhere}.list-item p{margin:0;color:var(--muted);font-size:13px;overflow-wrap:anywhere}.empty{padding:28px;text-align:center;border:1px dashed #c8d7ce;border-radius:14px;color:var(--muted)}.stat{font-size:29px;font-weight:800;letter-spacing:-.04em}.divider{border:0;border-top:1px solid var(--line);margin:17px 0}.notice{font-size:13px;padding:13px 14px;border-radius:12px;background:#edf4f8;color:#345267}.checkline{display:flex;gap:9px;align-items:center;font-size:14px}.checkline input{width:auto}.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#173d35;color:white;padding:12px 18px;border-radius:12px;box-shadow:var(--shadow);z-index:20;display:none;max-width:90vw}.toast.show{display:block}.hidden{display:none!important}.mobile-menu{display:none}
+@media(max-width:980px){.app{grid-template-columns:1fr}.sidebar{display:none}.sidebar.open{display:flex;position:fixed;inset:0 auto 0 0;width:270px;z-index:10;box-shadow:0 0 0 100vw #0c201b66}.mobile-menu{display:inline-flex}.grid.cards{grid-template-columns:repeat(2,minmax(0,1fr))}.chat-shell{grid-template-columns:1fr}.chat-aside{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.content{padding:15px}.topbar{padding:13px 15px}.hero{grid-template-columns:1fr}.hero-mark{display:none}.grid.cards,.grid.two{grid-template-columns:1fr}.chat-aside{grid-template-columns:1fr}.chat-messages{max-height:none;min-height:200px;padding:14px}.bubble{max-width:100%}.top-actions .hide-mobile{display:none}.card{padding:16px}}
+</style>
 </head>
-
 <body>
-    <header class="topbar">
-        <button id="menuToggle" aria-label="Ouvrir le menu">☰</button>
+<div class="app">
+<aside class="sidebar" id="sidebar">
+  <div class="brand"><div class="brandmark">M</div><div><h1>MOT JUSTE</h1><small>Les mots à leur place.</small></div></div>
+  <nav class="nav" id="nav">
+    <button class="active" data-page="home"><span class="ico">⌂</span>Accueil</button>
+    <button data-page="write"><span class="ico">✎</span>Conversation d'écriture</button>
+    <button data-page="projects"><span class="ico">▦</span>Projets et tâches</button>
+    <button data-page="documents"><span class="ico">▤</span>Mes documents</button>
+    <button data-page="cv"><span class="ico">▧</span>CV et lettres</button>
+    <button data-page="thesis"><span class="ico">▥</span>Mémoire et thèse</button>
+    <button data-page="import"><span class="ico">⇧</span>Importer / travailler sur un document</button>
+    <button data-page="ideas"><span class="ico">✧</span>Idées et réflexion</button>
+    <button data-page="settings"><span class="ico">⚙</span>Préférences</button>
+    <button data-page="account"><span class="ico">♙</span>Compte et synchronisation</button>
+  </nav>
+  <div class="side-note"><strong>Votre espace de travail</strong>Dans cette version de démonstration, vos données restent dans ce navigateur. L'accès en ligne multi-appareils sera activé avec un serveur sécurisé.</div>
+</aside>
+<main class="main">
+<header class="topbar">
+  <div class="row"><button class="button mobile-menu" id="menuBtn" aria-label="Ouvrir le menu">☰</button><div><div class="crumb">MOT JUSTE / <span id="crumb">Accueil</span></div><h2 id="pageTitle">Votre espace de travail</h2></div></div>
+  <div class="top-actions"><button class="button small hide-mobile" id="exportBtn">Sauvegarder mes données</button><div class="avatar" title="Espace personnel">MJ</div></div>
+</header>
+<div class="content">
+<section class="page active" id="page-home">
+  <div class="hero"><div><div class="eyebrow">Un espace pour penser, écrire et organiser</div><h1>Les bonnes idées méritent les bons mots.</h1><p>Rédigez, améliorez vos textes, organisez vos projets et gardez vos documents au même endroit.</p><div class="row"><button class="button primary" data-goto="write">Commencer à écrire →</button><button class="button" data-goto="projects">Voir mes projets</button></div></div><div class="hero-mark">✍🏽</div></div>
+      <div class="card"><h3>Enregistrer le résultat</h3><div class="field"><label for="saveTitle">Titre du document</label><input id="saveTitle" placeholder="Ex. : Lettre de demande"></div><div class="row"><button class="button primary" id="saveChatBtn">Enregistrer</button><button class="button" id="exportChatBtn">Télécharger .txt</button></div><p class="muted" id="saveStatus" style="font-size:12px;margin-top:8px"></p></div>
+    </aside>
+  </div>
+</section>
 
-        <a href="#accueil" class="brand">
-            <span class="brand-mark">M·J</span>
-            <span>
-                MOT <strong>JUSTE</strong>
-                <small>Lire. Comprendre. Explorer.</small>
-            </span>
-        </a>
+<section class="page" id="page-projects">
+  <div class="row spread"><div><div class="eyebrow">Organisation</div><h1>Projets et tâches</h1><p class="muted">Transformez vos objectifs en étapes concrètes.</p></div><button class="button primary" id="addProjectBtn">＋ Nouveau projet</button></div>
+  <div class="grid two"><div class="card"><h3>Créer une tâche</h3><div class="field"><label for="taskText">Tâche</label><input id="taskText" placeholder="Ex. : Préparer le rapport"></div><div class="field"><label for="taskProject">Projet associé</label><select id="taskProject"><option value="">Sans projet</option></select></div><div class="row"><button class="button primary" id="addTaskBtn">Ajouter la tâche</button></div></div><div class="card"><h3>Vue d'ensemble</h3><div class="grid two"><div><div class="stat" id="projectCount">0</div><div class="muted">Projets</div></div><div><div class="stat" id="taskCount">0</div><div class="muted">Tâches ouvertes</div></div></div><hr class="divider"><p class="muted">Cochez les tâches terminées. Vous pouvez modifier ou supprimer un projet.</p></div></div>
+  <h2 style="margin-top:24px">Mes projets</h2><div class="list" id="projectsList"></div><h2 style="margin-top:24px">Mes tâches</h2><div class="list" id="tasksList"></div>
+</section>
 
-        <form id="globalSearchForm" class="search-form">
-            <input
-                id="globalSearch"
-                type="search"
-                placeholder="Un mot, une idée, un texte…"
-                aria-label="Rechercher"
-            >
-            <button type="submit">Rechercher</button>
-        </form>
-    </header>
+<section class="page" id="page-documents">
+  <div class="row spread"><div><div class="eyebrow">Bibliothèque personnelle</div><h1>Mes documents</h1><p class="muted">Retrouvez vos textes enregistrés et leur historique de versions.</p></div><button class="button" id="importFromDocsBtn">⇧ Importer un fichier</button></div>
+  <div class="field"><label for="docSearch">Rechercher dans mes documents</label><input id="docSearch" placeholder="Titre, type ou contenu…"></div><div class="list" id="documentsList"></div>
+  <div class="card hidden" id="docEditor" style="margin-top:18px"><div class="row spread"><h2 id="docEditorTitle">Modifier le document</h2><button class="button small" id="closeDocEditor">Fermer</button></div><div class="field"><label for="editDocTitle">Titre</label><input id="editDocTitle"></div><div class="field"><label for="editDocContent">Contenu</label><textarea id="editDocContent" rows="12" style="min-height:260px"></textarea></div><div class="row"><button class="button primary" id="updateDocBtn">Enregistrer une nouvelle version</button><button class="button" id="compareVersionsBtn">Comparer les versions</button><button class="button" id="downloadDocBtn">Télécharger .txt</button><button class="button danger" id="deleteDocBtn">Supprimer</button></div><div id="versionCompare" class="notice hidden" style="margin-top:14px"></div><div id="versionHistory" style="margin-top:14px"></div></div>
+</section>
 
-    <div class="app-shell">
+<section class="page" id="page-cv">
+  <div class="eyebrow">Candidatures et communication professionnelle</div><h1>CV et lettres</h1><p class="muted">Préparez une première trame, puis personnalisez chaque détail avant utilisation.</p>
+  <div class="grid two">
+    <div class="card"><h2>Créer un CV</h2><div class="field"><label for="cvName">Nom et prénom</label><input id="cvName" placeholder="Votre nom"></div><div class="field"><label for="cvContact">Coordonnées</label><input id="cvContact" placeholder="E-mail · téléphone · ville"></div><div class="field"><label for="cvRole">Poste ou objectif</label><input id="cvRole" placeholder="Poste recherché"></div><div class="field"><label for="cvProfile">Profil professionnel</label><textarea id="cvProfile" placeholder="Quelques phrases sur votre parcours"></textarea></div><div class="field"><label for="cvExperience">Expériences</label><textarea id="cvExperience" placeholder="Postes, dates, missions et résultats"></textarea></div><div class="field"><label for="cvEducation">Formation</label><textarea id="cvEducation" placeholder="Diplômes, établissements, dates"></textarea></div><div class="field"><label for="cvSkills">Compétences</label><textarea id="cvSkills" placeholder="Compétences techniques et personnelles"></textarea></div><button class="button primary" id="makeCVBtn">Générer la trame du CV</button></div>
+    <div class="card"><h2>Lettre ou courriel</h2><div class="field"><label for="letterType">Type</label><select id="letterType"><option>Lettre de motivation</option><option>Courriel professionnel</option><option>Demande administrative</option><option>Lettre de réclamation</option><option>Remerciement professionnel</option><option>Lettre de présentation</option></select></div><div class="field"><label for="letterRecipient">Destinataire / organisme</label><input id="letterRecipient" placeholder="Nom, fonction ou organisme"></div><div class="field"><label for="letterPurpose">Objet et objectif</label><input id="letterPurpose" placeholder="Pourquoi écrivez-vous ?"></div><div class="field"><label for="letterDetails">Informations à inclure</label><textarea id="letterDetails" placeholder="Votre situation, arguments, dates, pièces jointes…"></textarea></div><div class="field"><label for="letterTone">Ton</label><select id="letterTone"><option>Professionnel et courtois</option><option>Chaleureux</option><option>Ferme et respectueux</option><option>Très formel</option></select></div><button class="button primary" id="makeLetterBtn">Créer une trame</button></div>
+  </div><div class="card hidden" id="cvResultCard" style="margin-top:18px"><div class="row spread"><h2>Votre trame modifiable</h2><div class="row"><button class="button small" id="saveCVResult">Enregistrer</button><button class="button small" id="downloadCVResult">Télécharger</button></div></div><textarea id="cvResult" rows="18" style="min-height:350px"></textarea></div>
+</section>
 
-        <aside class="sidebar" id="sidebar">
-            <p class="nav-label">EXPLORER</p>
+<section class="page" id="page-thesis">
+  <div class="eyebrow">Travaux académiques</div><h1>Mémoire et thèse</h1><p class="muted">Construisez une structure claire. Vérifiez les références, les données et les exigences de votre établissement.</p>
+  <div class="grid two"><div class="card"><h2>Construire un plan</h2><div class="field"><label for="thesisTitle">Sujet provisoire</label><input id="thesisTitle" placeholder="Sujet de recherche"></div><div class="field"><label for="thesisQuestion">Question de recherche</label><textarea id="thesisQuestion" placeholder="Quel problème souhaitez-vous étudier ?"></textarea></div><div class="field"><label for="thesisType">Type de travail</label><select id="thesisType"><option>Mémoire</option><option>Thèse</option><option>Dissertation</option><option>Rapport de recherche</option><option>Projet de recherche</option></select></div><div class="field"><label for="thesisDiscipline">Discipline</label><input id="thesisDiscipline" placeholder="Ex. : sociologie, gestion, biologie"></div><button class="button primary" id="makeOutlineBtn">Créer un plan de départ</button></div><div class="card"><h2>Checklist de recherche</h2><div class="list" id="researchChecklist"></div><hr class="divider"><p class="muted" style="font-size:13px">Les références bibliographiques doivent être réelles et vérifiées. Cette version ne recherche pas automatiquement des sources.</p></div></div>
+  <div class="card hidden" id="thesisResultCard" style="margin-top:18px"><div class="row spread"><h2>Plan modifiable</h2><button class="button small" id="saveThesisBtn">Enregistrer le plan</button></div><textarea id="thesisResult" rows="18" style="min-height:360px"></textarea></div>
+</section>
 
-            <nav>
-                <button class="nav-link active" data-page="accueil">⌂ Accueil</button>
-                <button class="nav-link" data-page="bibliotheque">▤ Grande Bibliothèque</button>
-                <button class="nav-link" data-page="surface">⌕ Sous la surface</button>
-                <button class="nav-link" data-page="mot-juste">✳ Le Mot juste</button>
-                <button class="nav-link" data-page="style">↔ Laboratoire du style</button>
-                <button class="nav-link" data-page="nuances">❝ Atelier des nuances</button>
+<section class="page" id="page-import">
+  <div class="eyebrow">Modifier sans perdre l'original</div><h1>Importer et travailler sur un document</h1><p class="muted">Chargez un fichier pris en charge, gardez son texte d'origine et créez une version modifiée.</p>
+  <div class="card"><div class="field"><label for="fileInput">Choisir un fichier (.txt, .md, .csv, .json, .html)</label><input type="file" id="fileInput" accept=".txt,.md,.csv,.json,.html,.htm"></div><div class="field"><label for="importTitle">Titre du document</label><input id="importTitle" placeholder="Titre du document"></div><div class="field"><label for="importContent">Contenu original</label><textarea id="importContent" rows="12" style="min-height:240px" placeholder="Le texte importé apparaîtra ici. Vous pouvez aussi coller votre texte."></textarea></div><div class="row"><button class="button" id="copyOriginalBtn">Copier dans l'éditeur</button><button class="button primary" id="saveOriginalBtn">Enregistrer l'original</button><button class="button" id="downloadOriginalBtn">Télécharger le texte</button></div></div>
+  <div class="card" style="margin-top:18px"><h2>Que voulez-vous modifier ?</h2><div class="field"><label for="editInstruction">Instruction précise</label><textarea id="editInstruction" placeholder="Ex. : Corrige l'orthographe sans changer mon style. / Rends ce passage plus clair. / Résume en 5 points."></textarea></div><button class="button primary" id="applyEditBtn">Préparer une version modifiée</button><div class="field"><label for="modifiedContent">Version modifiée (modifiable)</label><textarea id="modifiedContent" rows="12" style="min-height:240px" placeholder="Le résultat apparaîtra ici. Relisez-le avant de l'utiliser."></textarea></div><div class="row"><button class="button primary" id="saveModifiedBtn">Enregistrer comme nouvelle version</button><button class="button" id="compareImportedBtn">Comparer avant / après</button><button class="button" id="downloadModifiedBtn">Télécharger le résultat</button></div><div id="importCompare" class="notice hidden" style="margin-top:14px"></div></div>
+  <div class="hint" style="margin-top:18px">Pour les fichiers très longs, travaillez par sections et conservez une copie de l'original. Cette version locale ne réalise pas encore d'analyse automatique fiable de fichiers Word ou PDF.</div>
+</section>
 
-                <p class="nav-label">MON UNIVERS</p>
+<section class="page" id="page-ideas">
+  <div class="eyebrow">Réflexion et créativité</div><h1>Idées libres et réflexion</h1><p class="muted">Déposez vos idées telles qu'elles viennent. Vous pourrez ensuite les organiser en pistes, décisions ou plan d'action.</p>
+  <div class="grid two"><div class="card"><div class="field"><label for="ideaTopic">Sujet ou problème</label><input id="ideaTopic" placeholder="Sur quoi voulez-vous réfléchir ?"></div><div class="field"><label for="ideaNotes">Notes libres</label><textarea id="ideaNotes" rows="8" placeholder="Écrivez vos pensées, même désordonnées…"></textarea></div><div class="field"><label for="ideaGoal">Résultat souhaité (facultatif)</label><select id="ideaGoal"><option>Organiser mes pensées</option><option>Faire émerger des idées</option><option>Comparer des options</option><option>Préparer un plan d'action</option><option>Résoudre un problème</option></select></div><button class="button primary" id="organizeIdeasBtn">Organiser mes notes</button></div><div class="card"><h2>Résultat structuré</h2><textarea id="ideaResult" rows="14" style="min-height:350px" placeholder="Votre plan apparaîtra ici."></textarea><div class="row" style="margin-top:10px"><button class="button primary" id="saveIdeaBtn">Enregistrer</button><button class="button" id="downloadIdeaBtn">Télécharger</button></div></div></div>
+</section>
 
-                <button class="nav-link" data-page="espace">♡ Mon espace</button>
-                <button class="nav-link" data-page="parcours">◎ Parcours et découvertes</button>
-            </nav>
+<section class="page" id="page-settings">
+  <div class="eyebrow">Personnalisation</div><h1>Préférences</h1><p class="muted">Réglez les paramètres qui vous conviennent. Ils restent facultatifs dans l'atelier.</p>
+  <div class="grid two"><div class="card"><h2>Préférences d'écriture</h2><div class="field"><label for="prefTone">Ton préféré</label><select id="prefTone"><option>Selon le contexte</option><option>Professionnel</option><option>Chaleureux</option><option>Direct</option><option>Diplomatique</option><option>Académique</option><option>Créatif</option></select></div><div class="field"><label for="prefLength">Longueur habituelle</label><select id="prefLength"><option>Selon le besoin</option><option>Très court</option><option>Court</option><option>Moyen</option><option>Détaillé</option></select></div><div class="field"><label for="prefLanguage">Langue préférée</label><select id="prefLanguage"><option>Français</option><option>English</option><option>Español</option><option>Русский</option><option>Créole haïtien</option></select></div><label class="checkline"><input type="checkbox" id="prefVoice"> Proposer la lecture vocale quand elle est disponible</label><div style="margin-top:14px"><button class="button primary" id="savePrefsBtn">Enregistrer les préférences</button></div></div><div class="card"><h2>Mes données</h2><p>Dans cette version, les projets et documents sont enregistrés dans le stockage local du navigateur utilisé.</p><div class="row"><button class="button primary" id="exportSettingsBtn">Exporter une sauvegarde JSON</button><label class="button" for="backupInput">Restaurer une sauvegarde</label><input class="hidden" type="file" id="backupInput" accept=".json,application/json"></div><hr class="divider"><button class="button danger" id="clearAllBtn">Effacer toutes les données locales</button><p class="muted" style="font-size:12px">Cette action est irréversible sans fichier de sauvegarde. Exportez vos données avant de continuer.</p></div></div>
+</section>
 
-            <div class="sidebar-note">
-                <span>✦</span>
-                <p>Un mot peut ouvrir tout un monde.</p>
-                <small>Prends le temps d'explorer.</small>
-            </div>
-        </aside>
+<section class="page" id="page-account">
+  <div class="eyebrow">Accès personnel</div><h1>Compte et synchronisation</h1><p class="muted">Le compte permettra de retrouver les documents sur plusieurs appareils.</p>
+  <div class="grid two"><div class="card"><h2>Connexion sécurisée</h2><p>La création de comptes par e-mail et mot de passe nécessite un service d'authentification sécurisé connecté au serveur.</p><div class="field"><label for="accountEmail">Adresse e-mail (aperçu uniquement)</label><input id="accountEmail" type="email" placeholder="vous@exemple.com" autocomplete="email"></div><div class="field"><label for="accountPassword">Mot de passe</label><input id="accountPassword" type="password" placeholder="À ne pas saisir dans cette démonstration" autocomplete="new-password"></div><button class="button primary" id="accountInfoBtn">Voir les étapes nécessaires</button><div class="notice hidden" id="accountNotice" style="margin-top:12px"></div></div><div class="card"><h2>Synchronisation</h2><p>Pour partager vos documents entre téléphone et ordinateur, il faudra une base de données en ligne, un stockage sécurisé et des règles d'accès par utilisateur.</p><span class="pill">Pas encore connecté</span><hr class="divider"><p class="muted" style="font-size:13px">Ne saisissez pas votre vrai mot de passe ici. Cette page ne crée pas de compte et n'envoie aucune donnée.</p></div></div>
+</section>
 
-        <main id="main">
+<footer class="muted" style="font-size:12px;text-align:center;padding:28px 0 12px">MOT JUSTE · Prototype local · Pensez à exporter régulièrement une sauvegarde.</footer>
+</div>
+</main>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
 
-            <!-- ACCUEIL -->
-            <section class="page active" id="page-accueil">
-                <p class="eyebrow">TON ESPACE DE LECTURE</p>
+  <div class="grid cards" style="margin-bottom:22px">
+    <div class="card"><div class="muted">Documents enregistrés</div><div class="stat" id="statDocs">0</div><p class="muted">Vos textes et versions.</p></div>
+    <div class="card"><div class="muted">Projets actifs</div><div class="stat" id="statProjects">0</div><p class="muted">Vos idées en mouvement.</p></div>
+    <div class="card"><div class="muted">Tâches à terminer</div><div class="stat" id="statTasks">0</div><p class="muted">Un pas à la fois.</p></div>
+  </div>
+  <div class="row spread" style="margin-bottom:12px"><div><h2>Que souhaitez-vous faire ?</h2><p class="muted">Choisissez un domaine ou expliquez simplement votre besoin.</p></div></div>
+  <div class="grid cards" id="homeCategories"></div>
+  <div class="card" style="margin-top:22px"><div class="row spread"><div><h3>Reprendre mon travail</h3><p class="muted">Les documents récemment enregistrés apparaîtront ici.</p></div><button class="button small" data-goto="documents">Tous les documents</button></div><div class="list" id="recentDocs"></div></div>
+</section>
 
-                <h1>Les mots ont<br><em>plusieurs vies.</em></h1>
-
-                <p class="intro">
-                    Lis à ton rythme. Explore les idées.
-                    Découvre ce qui se cache derrière les mots.
-                </p>
-
-                <form id="heroSearchForm" class="hero-search">
-                    <input
-                        id="heroSearch"
-                        type="search"
-                        placeholder="Chercher un mot, un thème, une idée…"
-                    >
-                    <button type="submit">Explorer →</button>
-                </form>
-
-                <section class="section">
-                    <div class="section-heading">
-                        <div>
-                            <p class="eyebrow">LE CABINET DE DÉCOUVERTES</p>
-                            <h2>Et si tu découvrais…</h2>
-                        </div>
-
-                        <button id="surpriseButton" class="text-button">
-                            Surprends-moi ↗
-                        </button>
-                    </div>
-
-                    <article class="discovery-card">
-                        <div class="discovery-symbol" id="discoverySymbol">✦</div>
-
-                        <div>
-                            <span class="pill" id="discoveryType">NUANCE DU JOUR</span>
-
-                            <h3 id="discoveryTitle">Silence, calme, mutisme</h3>
-
-                            <p id="discoveryDescription">
-                                Ces mots se rapprochent, mais ils ne racontent
-                                pas tout à fait la même chose.
-                            </p>
-
-                            <button id="discoveryExplore" class="text-button">
-                                Explorer cette nuance →
-                            </button>
-                        </div>
-                    </article>
-                </section>
-
-                <section class="section">
-                    <div class="section-heading">
-                        <div>
-                            <p class="eyebrow">LA GRANDE BIBLIOTHÈQUE</p>
-                            <h2>Choisis ton univers</h2>
-                        </div>
-
-                        <button class="text-button" data-goto="bibliotheque">
-                            Tout explorer →
-                        </button>
-                    </div>
-
-                    <div class="universe-grid">
-                        <button class="universe-card" data-theme="Littérature et récits">
-                            <span>❧</span>
-                            <div>
-                                <strong>Littérature et récits</strong>
-                                <small>Histoires, portraits, dialogues</small>
-                            </div>
-                        </button>
-
-                        <button class="universe-card" data-theme="Vie intérieure et relations">
-                            <span>☼</span>
-                            <div>
-                                <strong>Vie intérieure</strong>
-                                <small>Émotions, liens, mémoire</small>
-                            </div>
-                        </button>
-
-                        <button class="universe-card" data-theme="Philosophie et idées">
-                            <span>◇</span>
-                            <div>
-                                <strong>Philosophie et idées</strong>
-                                <small>Questions, choix, liberté</small>
-                            </div>
-                        </button>
-
-                        <button class="universe-card" data-theme="Sciences et connaissances">
-                            <span>⌬</span>
-                            <div>
-                                <strong>Sciences et savoirs</strong>
-                                <small>Comprendre le monde</small>
-                            </div>
-                        </button>
-
-                        <button class="universe-card" data-theme="Langue française">
-                            <span>Aa</span>
-                            <div>
-                                <strong>Langue française</strong>
-                                <small>Mots, registres, expressions</small>
-                            </div>
-                        </button>
-
-                        <button class="universe-card" data-theme="Société et monde">
-                            <span>◎</span>
-                            <div>
-                                <strong>Société et monde</strong>
-                                <small>Regards sur notre époque</small>
-                            </div>
-                        </button>
-
-                        <button class="universe-card" data-theme="Imagination et mondes possibles">
-                            <span>✧</span>
-                            <div>
-                                <strong>Imagination</strong>
-                                <small>Rêves, mystères, possibles</small>
-                            </div>
-                        </button>
-
-                        <button class="universe-card" data-theme="Communication et vie pratique">
-                            <span>✉</span>
-                            <div>
-                                <strong>Communication</strong>
-                                <small>Écrire, parler, expliquer</small>
-                            </div>
-                        </button>
-                    </div>
-                </section>
-
-                <section class="section">
-                    <p class="eyebrow">POUR COMMENCER</p>
-                    <h2>Une lecture à découvrir</h2>
-                    <div id="homeTextCards" class="text-grid"></div>
-                </section>
-            </section>
-
-            <!-- GRANDE BIBLIOTHÈQUE -->
-            <section class="page" id="page-bibliotheque">
-                <p class="eyebrow">LIRE À TON RYTHME</p>
-                <h1>Grande <em>Bibliothèque</em></h1>
-                <p class="intro">
-                    Des textes à parcourir, à savourer ou à examiner de plus près.
-                </p>
-
-                <div class="filters">
-                    <input id="librarySearch" type="search" placeholder="Rechercher un texte…">
-
-                    <select id="themeFilter">
-                        <option value="">Tous les univers</option>
-                        <option>Littérature et récits</option>
-                        <option>Vie intérieure et relations</option>
-                        <option>Philosophie et idées</option>
-                        <option>Sciences et connaissances</option>
-                        <option>Langue française</option>
-                        <option>Société et monde</option>
-                        <option>Imagination et mondes possibles</option>
-                        <option>Communication et vie pratique</option>
-                    </select>
-
-                    <select id="lengthFilter">
-                        <option value="">Toutes les longueurs</option>
-                        <option>Éclat</option>
-                        <option>Court</option>
-                        <option>Moyen</option>
-                    </select>
-
-                    <select id="toneFilter">
-                        <option value="">Tous les tons</option>
-                        <option>Contemplatif</option>
-                        <option>Analytique</option>
-                        <option>Narratif</option>
-                        <option>Poétique</option>
-                    </select>
-
-                    <button id="clearFilters">Effacer les filtres</button>
-                </div>
-
-                <p id="resultsCount" class="helper-text"></p>
-                <div id="libraryTextCards" class="text-grid"></div>
-
-                <div id="emptyState" class="empty-state hidden">
-                    <h3>Aucun texte trouvé</h3>
-                    <p>Essaie un autre mot ou retire un filtre.</p>
-                </div>
-            </section>
-
-            <!-- SOUS LA SURFACE -->
-            <section class="page" id="page-surface">
-                <p class="eyebrow">LIRE AU-DELÀ DES LIGNES</p>
-                <h1>Sous la <em>surface</em></h1>
-
-                <p class="intro">
-                    Explorer le sens explicite, les sous-entendus, les images,
-                    les intentions et la structure des textes.
-                </p>
-
-                <div class="feature-panel">
-                    <span class="feature-icon">⌕</span>
-                    <div>
-                        <h2>Apprendre à observer</h2>
-                        <p>
-                            Nous développerons ici des analyses guidées pour
-                            comprendre comment un texte produit son sens.
-                        </p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- LE MOT JUSTE -->
-            <section class="page" id="page-mot-juste">
-                <p class="eyebrow">CHOISIR AVEC PRÉCISION</p>
-                <h1>Le <em>Mot juste</em></h1>
-
-                <p class="intro">
-                    Définitions, synonymes, antonymes, nuances, expressions
-                    et familles de mots.
-                </p>
-
-                <div class="word-panel">
-                    <label for="wordSearch">Quel mot veux-tu explorer ?</label>
-                    <div class="word-search-row">
-                        <input id="wordSearch" type="search" placeholder="Ex. : paisible, hésiter, lucide…">
-                        <button id="wordSearchButton">Explorer</button>
-                    </div>
-                    <p id="wordSearchResult" class="helper-text">
-                        Le dictionnaire détaillé sera développé progressivement.
-                    </p>
-                </div>
-            </section>
-
-            <!-- LABORATOIRE DU STYLE -->
-            <section class="page" id="page-style">
-                <p class="eyebrow">UNE IDÉE, PLUSIEURS VOIX</p>
-                <h1>Laboratoire <em>du style</em></h1>
-
-                <p class="intro">
-                    Comparer des formulations pour comprendre comment le ton,
-                    le registre et les mots modifient l'effet d'une phrase.
-                </p>
-
-                <div class="comparison-panel">
-                    <div class="comparison-row">
-                        <span>SIMPLE</span>
-                        <p>Je ne suis pas d'accord avec cette idée.</p>
-                    </div>
-
-                    <div class="comparison-row">
-                        <span>SOUTENU</span>
-                        <p>Je ne partage pas ce point de vue.</p>
-                    </div>
-
-                    <div class="comparison-row">
-                        <span>DIPLOMATIQUE</span>
-                        <p>
-                            Je comprends ce raisonnement, même si mon analyse
-                            m'amène à une autre conclusion.
-                        </p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- ATELIER DES NUANCES -->
-            <section class="page" id="page-nuances">
-                <p class="eyebrow">LES SUBTILITÉS DE LA LANGUE</p>
-                <h1>Atelier des <em>nuances</em></h1>
-
-                <p class="intro">
-                    Explorer les petites différences qui changent la précision,
-                    le ton ou l'effet d'une expression.
-                </p>
-
-                <article class="question-card">
-                    <h2>Quelle différence entre « calme » et « paisible » ?</h2>
-                    <p>
-                        « Calme » décrit souvent l'absence d'agitation.
-                        « Paisible » évoque davantage une tranquillité qui
-                        inspire la paix. Le contexte compte toujours.
-                    </p>
-                </article>
-            </section>
-
-            <!-- MON ESPACE -->
-            <section class="page" id="page-espace">
-                <p class="eyebrow">TON UNIVERS PERSONNEL</p>
-                <h1>Mon <em>espace</em></h1>
-
-                <p class="intro">
-                    Retrouver les textes favoris et, plus tard, tes notes,
-                    collections et historique de lecture.
-                </p>
-
-                <div class="personal-tabs">
-                    <button class="personal-tab active" data-personal="favorites">♡ Favoris</button>
-                    <button class="personal-tab" data-personal="history">◷ Historique</button>
-                </div>
-
-                <div id="personalContent" class="text-grid"></div>
-            </section>
-
-            <!-- PARCOURS ET DÉCOUVERTES -->
-            <section class="page" id="page-parcours">
-                <p class="eyebrow">SUIVRE UN FIL</p>
-                <h1>Parcours et <em>découvertes</em></h1>
-
-                <p class="intro">
-                    Des chemins de lecture pour relier des textes, des idées
-                    et des mots autour d'un même fil conducteur.
-                </p>
-
-                <div class="pathway-grid">
-                    <article>
-                        <span>☼</span>
-                        <h2>Les visages du silence</h2>
-                        <p>Explorer le silence comme repos, gêne, choix ou absence.</p>
-                    </article>
-
-                    <article>
-                        <span>↔</span>
-                        <h2>Dire autrement</h2>
-                        <p>Comparer les registres et ajuster une formulation.</p>
-                    </article>
-
-                    <article>
-                        <span>◇</span>
-                        <h2>Le temps et la mémoire</h2>
-                        <p>Relier récits, réflexions et connaissances.</p>
-                    </article>
-                </div>
-            </section>
-
-            <footer class="footer">
-                <strong>MOT JUSTE</strong>
-                <span>Une œuvre en construction.</span>
-                <span>Lire · Comprendre · Explorer</span>
-            </footer>
-        </main>
+<section class="page" id="page-write">
+  <div class="row spread" style="margin-bottom:18px;align-items:flex-start"><div><div class="eyebrow">Atelier principal</div><h1>Parlons de ce que vous voulez écrire.</h1><p class="muted">Pas de questionnaire obligatoire. Choisissez un domaine et écrivez comme vous le feriez à une personne.</p></div><button class="button" id="newChatBtn">＋ Nouvelle conversation</button></div>
+  <div class="grid cards" id="writeCategories" style="margin-bottom:18px"></div>
+  <div class="chat-shell">
+    <div class="card chat-card">
+      <div class="chat-head"><div><strong id="chatCategoryTitle">1. Travail et vie professionnelle</strong><div class="muted" style="font-size:12px">Conversation de rédaction</div></div><span class="pill">Texte · voix facultative</span></div>
+      <div class="chat-messages" id="chatMessages" aria-live="polite"></div>
+      <div class="chat-compose">
+        <textarea id="chatInput" placeholder="Décrivez votre idée, collez vos notes ou demandez une modification… (Ctrl/⌘ + Entrée pour envoyer)"></textarea>
+        <div class="compose-bottom"><div class="row"><button class="button small" id="dictateBtn">🎙️ Dicter</button><button class="button small" id="optionsBtn">⚙ Options d’écriture</button><button class="button small" id="clearInputBtn">Effacer</button></div><button class="button primary" id="sendBtn">Envoyer ↑</button></div>
+        <div class="muted" id="voiceStatus" style="font-size:12px"></div>
+        <div class="card hidden" id="optionsPanel" style="box-shadow:none;background:#f8faf8">
+          <div class="grid two">
+            <div class="field"><label for="optTone">Ton (facultatif)</label><select id="optTone"><option value="">Laissez MOT JUSTE choisir</option><option>Professionnel</option><option>Chaleureux</option><option>Direct</option><option>Diplomatique</option><option>Académique</option><option>Créatif</option><option>Persuasif</option><option>Simple et accessible</option></select></div>
+            <div class="field"><label for="optLength">Longueur (facultatif)</label><select id="optLength"><option value="">Selon le besoin</option><option>Très court</option><option>Court</option><option>Moyen</option><option>Détaillé</option><option>Très détaillé</option></select></div>
+            <div class="field"><label for="optAudience">Public visé (facultatif)</label><input id="optAudience" placeholder="Ex. : direction, clients, étudiants"></div>
+            <div class="field"><label for="optLevel">Niveau de langue (facultatif)</label><select id="optLevel"><option value="">Naturel</option><option>Très simple</option><option>Courant</option><option>Soutenu</option><option>Technique</option></select></div>
+          </div>
+          <div class="row"><button class="button small" id="saveOptionsBtn">Appliquer les options</button><span class="muted" id="optionsStatus" style="font-size:12px"></span></div>
+        </div>
+      </div>
     </div>
+    <aside class="chat-aside">
+      <div class="card"><h3>Options rapides</h3><p class="muted" style="font-size:13px">Vous pouvez aussi demander directement dans la conversation :</p><div class="list" id="quickActions"></div></div>
+      <div class="hint"><strong>À savoir</strong><br>Cette version sait organiser, corriger et transformer des textes avec des règles locales simples. Elle n'est pas encore connectée à un modèle d'IA : les réponses créatives complètes nécessiteront cette connexion.</div>
+      
+const $ = id => document.getElementById(id);
+const KEY = "mot_juste_complete_v1";
+const categories = [
+{id:"work",title:"Travail et vie professionnelle",icon:"💼",desc:"CV, courriels, rapports, candidatures, lettres et propositions."},
+{id:"study",title:"Études et recherche",icon:"📚",desc:"Dissertations, résumés, fiches de révision, exposés et plans de recherche."},
+{id:"creative",title:"Créativité et imagination",icon:"✨",desc:"Histoires, romans, poèmes, scénarios, personnages et univers."},
+{id:"personal",title:"Communication personnelle",icon:"💌",desc:"Messages, remerciements, invitations, excuses et discours."},
+{id:"projects",title:"Organisation et gestion de projets",icon:"🗂️",desc:"Plans d'action, objectifs, calendriers, tâches et budgets prévisionnels."},
+{id:"digital",title:"Publications et communication numérique",icon:"📱",desc:"Publications, blogs, slogans, descriptions et infolettres."},
+{id:"admin",title:"Documents administratifs et juridiques",icon:"📄",desc:"Demandes officielles, formulaires, réclamations et courriers administratifs."},
+{id:"ideas",title:"Idées libres et réflexion",icon:"💡",desc:"Brainstorming, résolution de problèmes, décisions et notes à organiser."}
+];
+const quickActions = [
+"Corrige les fautes sans changer mon style.",
+"Rends ce texte plus clair et naturel.",
+"Résume les idées principales.",
+"Rends le ton plus professionnel.",
+"Développe mes idées en un plan détaillé."
+];
+const defaultData = () => ({documents:[],projects:[],tasks:[],prefs:{tone:"Selon le contexte",length:"Selon le besoin",language:"Français",voice:false}});
+let data = loadData();
+let currentCategory = categories[0];
+let currentDocId = null;
+let lastResult = "";
+let chatHistory = [];
+let recognition = null;
 
-    <!-- Fenêtre de lecture -->
-    <dialog id="readerDialog">
-        <button id="closeReader" class="close-button" aria-label="Fermer">×</button>
-        <div id="readerContent"></div>
-    </dialog>
+function loadData(){
+ try{
+  const raw=localStorage.getItem(KEY);
+  if(raw){const d=JSON.parse(raw);return {...defaultData(),...d,prefs:{...defaultData().prefs,...(d.prefs||{})}};}
+ }catch(e){}
+ return defaultData();
+}
+function persist(){
+ try{localStorage.setItem(KEY,JSON.stringify(data));}
+ catch(e){toast("Stockage plein : exportez vos données puis supprimez les éléments inutiles.");}
+ updateStats();
+}
+function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,8);}
+function stamp(){return new Date().toLocaleString("fr-FR");}
+function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+function toast(msg){
+ const el=$("toast");el.textContent=msg;el.classList.add("show");
+ clearTimeout(window._toastTimer);window._toastTimer=setTimeout(()=>el.classList.remove("show"),2800);
+}
+function downloadFile(name,content,type="text/plain;charset=utf-8"){
+ const blob=new Blob([content],{type});
+ const url=URL.createObjectURL(blob);
+ const a=document.createElement("a");a.href=url;a.download=name;
+ document.body.appendChild(a);a.click();a.remove();
+ setTimeout(()=>URL.revokeObjectURL(url),1200);
+}
+function safeName(s){return (s||"document").trim().replace(/[^\p{L}\p{N}_-]+/gu,"_").slice(0,70)||"document";}
+function categoryById(id){return categories.find(c=>c.id===id)||categories[0];}
+function renderCategories(target){
+ $(target).innerHTML=categories.map(c=>`<button class="category-card" data-category="${c.id}"><span class="symbol">${c.icon}</span><span><strong>${c.title}</strong><small>${c.desc}</small></span></button>`).join("");
+}
+function setCategory(id){
+ currentCategory=categoryById(id);
+ $("chatCategoryTitle").textContent=currentCategory.title;
+ document.querySelectorAll("[data-category]").forEach(b=>b.classList.toggle("selected",b.dataset.category===id));
+ $("chatInput").placeholder="Décrivez votre besoin dans le domaine « "+currentCategory.title+" »…";
+}
+function navigate(page){
+ document.querySelectorAll(".page").forEach(p=>p.classList.toggle("active",p.id==="page-"+page));
+ document.querySelectorAll("#nav button").forEach(b=>b.classList.toggle("active",b.dataset.page===page));
+ const names={home:"Votre espace de travail",write:"Conversation d’écriture",projects:"Projets et tâches",documents:"Mes documents",cv:"CV et lettres",thesis:"Mémoire et thèse",import:"Importer un document",ideas:"Idées et réflexion",settings:"Préférences",account:"Compte et synchronisation"};
+ $("pageTitle").textContent=names[page]||"MOT JUSTE";
+ $("crumb").textContent=names[page]||"MOT JUSTE";
+ $("sidebar").classList.remove("open");
+ if(page==="home")renderHome();
+ if(page==="projects")renderProjects();
+ if(page==="documents")renderDocuments();
+}
+function updateStats(){
+ $("statDocs").textContent=data.documents.length;
+ $("statProjects").textContent=data.projects.length;
+ $("statTasks").textContent=data.tasks.filter(t=>!t.done).length;
+ $("projectCount").textContent=data.projects.length;
+ $("taskCount").textContent=data.tasks.filter(t=>!t.done).length;
+}
+function renderHome(){
+ $("recentDocs").innerHTML=data.documents.slice().sort((a,b)=>b.updated-a.updated).slice(0,4).map(d=>`<div class="list-item"><div class="item-main"><h3>${esc(d.title)}</h3><p>${esc(d.updatedAt||"Document enregistré")}</p></div><button class="button small" data-open-doc="${d.id}">Ouvrir</button></div>`).join("")||'<div class="empty">Aucun document pour le moment. Enregistrez votre premier texte.</div>';
+ updateStats();
+}
+function renderQuickActions(){
+ $("quickActions").innerHTML=quickActions.map((q,i)=>`<button class="button small" style="text-align:left" data-quick="${i}">${q}</button>`).join("");
+}
+function renderResearchChecklist(){
+ const items=["Définir le sujet et les limites","Formuler la question de recherche","Lire et vérifier des sources fiables","Choisir une méthode adaptée","Organiser les chapitres","Vérifier les citations et références","Relire et respecter les consignes de l’établissement"];
+ $("researchChecklist").innerHTML=items.map((x,i)=>`<label class="checkline"><input type="checkbox" data-research="${i}"> ${x}</label>`).join("");
+}
+function saveDocument(title,content,extra={}){
+ const now=Date.now();
+ const doc={id:uid(),title:(title||"Document sans titre").trim(),content:String(content||""),created:now,updated:now,updatedAt:stamp(),type:extra.type||"Texte",versions:[]};
+ doc.versions.push({date:stamp(),content:doc.content});
+ data.documents.unshift(doc);persist();renderHome();renderDocuments();
+ return doc;
+}
+function addVersion(doc,content,title){
+ if(title)doc.title=title.trim();
+ doc.versions=doc.versions||[];
+ doc.versions.push({date:stamp(),content:String(content)});
+ doc.content=String(content);doc.updated=Date.now();doc.updatedAt=stamp();
+ persist();renderDocuments();renderHome();
+}
+function renderDocuments(){
+ const query=($("docSearch").value||"").toLowerCase().trim();
+ const docs=data.documents.filter(d=>(d.title+" "+d.content+" "+d.type).toLowerCase().includes(query));
+ $("documentsList").innerHTML=docs.map(d=>`<div class="list-item"><div class="item-main"><h3>${esc(d.title)}</h3><p>${esc(d.type||"Texte")} · Modifié le ${esc(d.updatedAt||"—")} · ${(d.content||"").length} caractères</p></div><div class="row"><button class="button small" data-open-doc="${d.id}">Ouvrir</button><button class="button small" data-download-doc="${d.id}">Télécharger</button></div></div>`).join("")||'<div class="empty">Aucun document trouvé.</div>';
+ updateStats();
+}
+function openDocument(id){
+ const d=data.documents.find(x=>x.id===id);if(!d)return;
+ currentDocId=id;
+ $("docEditor").classList.remove("hidden");
+ $("docEditorTitle").textContent=d.title;
+ $("editDocTitle").value=d.title;$("editDocContent").value=d.content;
+ $("versionCompare").classList.add("hidden");
+ $("versionHistory").innerHTML="<h3>Historique des versions</h3>"+((d.versions||[]).slice().reverse().map((v,i)=>`<div class="list-item"><div class="item-main"><h3>Version ${(d.versions.length-i)}</h3><p>${esc(v.date)} · ${(v.content||"").length} caractères</p></div><button class="button small" data-restore-version="${d.id}:${d.versions.length-i-1}">Restaurer dans l’éditeur</button></div>`).join("")||'<p class="muted">Aucune version.</p>');
+ $("docEditor").scrollIntoView({behavior:"smooth",block:"start"});
+}
+function renderProjects(){
+ $("projectsList").innerHTML=data.projects.map(p=>`<div class="list-item"><div class="item-main"><h3>${esc(p.name)}</h3><p>${esc(p.description||"Aucune description")} · Créé le ${esc(p.date||"")}</p></div><div class="row"><button class="button small" data-edit-project="${p.id}">Modifier</button><button class="button small danger" data-delete-project="${p.id}">Supprimer</button></div></div>`).join("")||'<div class="empty">Aucun projet. Créez votre premier projet.</div>';
+ $("tasksList").innerHTML=data.tasks.map(t=>`<div class="list-item"><label class="checkline"><input type="checkbox" data-task-done="${t.id}" ${t.done?"checked":""}><span style="${t.done?"text-decoration:line-through;opacity:.65":""}">${esc(t.text)}</span></label><div class="row"><span class="muted" style="font-size:12px">${esc(data.projects.find(p=>p.id===t.projectId)?.name||"Sans projet")}</span><button class="button small danger" data-delete-task="${t.id}">Supprimer</button></div></div>`).join("")||'<div class="empty">Aucune tâche enregistrée.</div>';
+ $("taskProject").innerHTML='<option value="">Sans projet</option>'+data.projects.map(p=>`<option value="${p.id}">${esc(p.name)}</option>`).join("");
+ updateStats();
+}
+function transformText(text,instruction,category){
+ let t=String(text||"").trim();if(!t)return "Ajoutez d’abord un texte pour que MOT JUSTE puisse vous aider.";
+ const cmd=(instruction||"").toLowerCase();
+ if(/corrig|orthograph|faute|grammaire/.test(cmd)){
+  t=t.replace(/[ \t]+([,.;:!?])/g,"$1").replace(/([,;:!?])(?=\S)/g,"$1 ").replace(/\s{2,}/g," ").replace(/\bi\b/g,"I");
+  t=t.charAt(0).toLocaleUpperCase("fr-FR")+t.slice(1);
+  if(!/[.!?…]$/.test(t))t+=".";
+  return "Version relue (correction simple — à vérifier) :\n\n"+t+"\n\nNote : cette correction locale ne remplace pas une relecture complète.";
+ }
+ if(/résum|resume|synthèse|points principaux/.test(cmd)){
+  const sentences=t.split(/(?<=[.!?])\s+/).filter(Boolean);
+  return "Résumé de travail :\n\n"+sentences.slice(0,Math.min(5,sentences.length)).map(s=>"• "+s).join("\n")+"\n\nÀ vérifier : ce résumé est une sélection simple de phrases du texte.";
+ }
+ if(/professionnel|formel|courtois/.test(cmd)){
+  return "Proposition de formulation professionnelle :\n\n"+t+"\n\nBonjour,\n\n"+t+"\n\nJe vous remercie pour votre attention et reste disponible pour toute précision.\n\nCordialement,";
+ }
+ if(/clair|naturel|simple/.test(cmd)){
+  return "Proposition de présentation plus claire :\n\n"+t.replace(/\s+/g," ").replace(/\s*([,;:])\s*/g,"$1 ").trim()+"\n\nRelisez cette proposition pour confirmer que le sens original est conservé.";
+ }
+ if(/plan|organis|structure|dévelop/.test(cmd)){
+  return "PLAN DE TRAVAIL\n\n1. Objectif\n"+t+"\n\n2. Idées principales\n• Idée principale 1\n• Idée principale 2\n• Idée principale 3\n\n3. Développement\n• Expliquer chaque idée avec un exemple ou un argument.\n• Ajouter les informations et les sources nécessaires.\n\n4. Conclusion\n• Résumer les points essentiels.\n• Préciser la prochaine étape.";
+ }
+ if(/idée|brainstorm|piste|solution/.test(cmd)){
+  return "PISTES DE RÉFLEXION\n\n1. Clarifier le problème : "+t+"\n2. Identifier les personnes concernées et les contraintes.\n3. Imaginer plusieurs solutions différentes.\n4. Comparer les avantages, les risques et les ressources nécessaires.\n5. Choisir une petite première action.\n\nQUESTIONS À EXPLORER\n• Quel résultat serait le plus utile ?\n• Quelles informations manquent ?\n• Quelle action simple peut être testée ?";
+ }
+ return "Première organisation de votre demande\n\nDomaine : "+category.title+"\n\nVotre texte :\n"+t+"\n\nÉtapes proposées :\n1. Définir l’objectif et le destinataire.\n2. Organiser les informations dans un ordre logique.\n3. Rédiger une première version.\n4. Vérifier le ton, les faits, les noms et les dates.\n5. Relire avant de partager.\n\nImportant : ce prototype n’est pas encore connecté à une IA générative. Il ne peut pas garantir une rédaction complète ou une recherche factuelle automatique.";
+}
+function addBubble(role,text){
+ const el=document.createElement("div");el.className="bubble "+role;
+ const content=document.createElement("div");content.textContent=text;el.appendChild(content);
+ if(role==="assistant"){
+  const tools=document.createElement("div");tools.className="bubble-tools";
+  const copy=document.createElement("button");copy.className="button small";copy.textContent="Copier";
+  copy.addEventListener("click",()=>copyText(text));
+  const save=document.createElement("button");save.className="button small";save.textContent="Enregistrer";
+  save.addEventListener("click",()=>{saveDocument(currentCategory.title+" — "+new Date().toLocaleDateString("fr-FR"),text,{type:currentCategory.title});toast("Réponse enregistrée.");});
+  tools.append(copy,save);el.appendChild(tools);
+ }
+ $("chatMessages").appendChild(el);$("chatMessages").scrollTop=$("chatMessages").scrollHeight;
+}
+async function copyText(text){
+ try{await navigator.clipboard.writeText(text);toast("Texte copié.");}
+ catch(e){const ta=document.createElement("textarea");ta.value=text;document.body.appendChild(ta);ta.select();try{document.execCommand("copy");toast("Texte copié.");}catch(err){toast("Copie impossible : sélectionnez le texte manuellement.");}ta.remove();}
+}
+function sendMessage(){
+ const raw=$("chatInput").value.trim();if(!raw)return;
+ const opts=[];
+ if($("optTone").value)opts.push("Ton : "+$("optTone").value);
+ if($("optLength").value)opts.push("Longueur : "+$("optLength").value);
+ if($("optAudience").value.trim())opts.push("Public : "+$("optAudience").value.trim());
+ if($("optLevel").value)opts.push("Niveau : "+$("optLevel").value);
+ addBubble("user",raw);chatHistory.push({role:"user",text:raw});
+ const instruction=opts.join(". ")+" "+raw;
+ const result=transformText(raw,instruction,currentCategory);
+ lastResult=result;addBubble("assistant",result);chatHistory.push({role:"assistant",text:result});
+ $("chatInput").value="";
+}
+function createProject(){
+ const name=prompt("Nom du projet :");if(!name||!name.trim())return;
+ const description=prompt("Description ou objectif (facultatif) :")||"";
+ data.projects.unshift({id:uid(),name:name.trim(),description,date:stamp()});persist();renderProjects();toast("Projet créé.");
+}
+function addTask(){
+ const text=$("taskText").value.trim();if(!text){toast("Écrivez d’abord le nom de la tâche.");return;}
+ data.tasks.unshift({id:uid(),text,projectId:$("taskProject").value,done:false,date:stamp()});$("taskText").value="";persist();renderProjects();toast("Tâche ajoutée.");
+}
+function makeCV(){
+ const fields=[["Nom", $("cvName").value],["Coordonnées",$("cvContact").value],["Objectif professionnel",$("cvRole").value],["Profil",$("cvProfile").value],["Expériences professionnelles",$("cvExperience").value],["Formation",$("cvEducation").value],["Compétences",$("cvSkills").value]];
+ const out="CURRICULUM VITAE\n"+ "═".repeat(28)+"\n\n"+fields.map(([k,v])=>k.toUpperCase()+"\n"+(v.trim()||"[À compléter]")).join("\n\n")+"\n\nRéférences : disponibles sur demande (si approprié).";
+ showResult("cvResultCard","cvResult",out);
+}
+function makeLetter(){
+ const type=$("letterType").value,recipient=$("letterRecipient").value.trim()||"[Nom du destinataire]",purpose=$("letterPurpose").value.trim()||"[Objet]",details=$("letterDetails").value.trim()||"[Détails à personnaliser]",tone=$("letterTone").value;
+ const greeting=tone==="Très formel"?"Madame, Monsieur,":"Bonjour,";
+ const out=type.toUpperCase()+"\n\nÀ l’attention de : "+recipient+"\nObjet : "+purpose+"\n\n"+greeting+"\n\nJe me permets de vous écrire au sujet suivant : "+purpose+".\n\n"+details+"\n\nJe vous remercie de l’attention portée à ma demande et reste à votre disposition pour toute information complémentaire.\n\n"+(tone==="Chaleureux"?"Bien cordialement,":"Veuillez agréer mes salutations distinguées,")+"\n\n[Nom et coordonnées]\n\nNote : relisez et adaptez les faits, dates et formules avant l’envoi.";
+ showResult("cvResultCard","cvResult",out);
+}
+function showResult(cardId,areaId,text){lastResult=text;$(areaId).value=text;$(cardId).classList.remove("hidden");$(cardId).scrollIntoView({behavior:"smooth",block:"start"});}
+function makeOutline(){
+ const title=$("thesisTitle").value.trim()||"[Sujet à préciser]",question=$("thesisQuestion").value.trim()||"[Question de recherche à préciser]",type=$("thesisType").value,discipline=$("thesisDiscipline").value.trim()||"[Discipline]";
+ const out=type.toUpperCase()+" — PLAN PROVISOIRE\nSujet : "+title+"\nDiscipline : "+discipline+"\nQuestion de recherche : "+question+"\n\nINTRODUCTION\n• Contexte et justification du sujet\n• Problématique et question de recherche\n• Objectifs général et spécifiques\n• Hypothèses ou propositions, si pertinentes\n• Méthodologie et annonce du plan\n\nCHAPITRE 1 — CADRE CONCEPTUEL ET REVUE DE LITTÉRATURE\n1.1 Définitions des concepts\n1.2 Théories et travaux antérieurs\n1.3 Synthèse critique et lacunes de la recherche\n\nCHAPITRE 2 — MÉTHODOLOGIE\n2.1 Type d’étude et approche\n2.2 Population, échantillon ou corpus\n2.3 Outils et procédure de collecte\n2.4 Méthodes d’analyse et considérations éthiques\n\nCHAPITRE 3 — RÉSULTATS ET ANALYSE\n3.1 Présentation des résultats\n3.2 Analyse par rapport à la question de recherche\n3.3 Discussion et comparaison avec la littérature\n\nCONCLUSION GÉNÉRALE\n• Réponse synthétique à la question\n• Limites du travail\n• Recommandations et pistes futures\n\nRÉFÉRENCES BIBLIOGRAPHIQUES\nÀ compléter uniquement avec des sources réellement consultées et vérifiées.\n\nANNEXES (si nécessaire)\n\nCe plan est un point de départ à adapter aux consignes de l’établissement et à la discipline.";
+ showResult("thesisResultCard","thesisResult",out);
+}
+function organizeIdeas(){
+ const topic=$("ideaTopic").value.trim()||"Sujet à préciser",notes=$("ideaNotes").value.trim()||"Aucune note fournie",goal=$("ideaGoal").value;
+ const out="SUJET : "+topic+"\nOBJECTIF : "+goal+"\n\n1. NOTES DE DÉPART\n"+notes+"\n\n2. CE QUI SEMBLE IMPORTANT\n• Identifier l’objectif principal.\n• Séparer les faits, les questions et les suppositions.\n• Repérer les ressources et contraintes.\n\n3. PISTES À EXPLORER\n• Quelle est la priorité ?\n• Quelles options sont possibles ?\n• Quelles informations manquent ?\n\n4. PROCHAINE ACTION\nChoisir une action simple et réaliste, puis fixer une date de suivi.\n\nCe résultat est une structure de réflexion, pas une analyse d’IA.";
+ $("ideaResult").value=out;lastResult=out;
+}
+function saveCurrentEditor(){
+ const d=data.documents.find(x=>x.id===currentDocId);if(!d)return;
+ addVersion(d,$("editDocContent").value,$("editDocTitle").value||d.title);
+ toast("Nouvelle version enregistrée.");
+}
+function compareTexts(a,b){
+ const wordsA=(a||"").trim().split(/\s+/).filter(Boolean),wordsB=(b||"").trim().split(/\s+/).filter(Boolean);
+ return "AVANT : "+wordsA.length+" mots · "+(a||"").length+" caractères\nAPRÈS : "+wordsB.length+" mots · "+(b||"").length+" caractères\n\nCette comparaison locale affiche les volumes. Elle ne fournit pas encore une comparaison mot à mot.";
+}
+function readFile(file,target,titleTarget){
+ if(!file)return;
+ const reader=new FileReader();
+ reader.onload=()=>{ $(target).value=String(reader.result||"");if(titleTarget)$(titleTarget).value=file.name.replace(/\.[^.]+$/,"");toast("Fichier importé. Vérifiez le contenu.");};
+ reader.onerror=()=>toast("Impossible de lire ce fichier.");
+ reader.readAsText(file);
+}
+function startDictation(){
+ const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+ if(!SR){$("voiceStatus").textContent="La dictée n’est pas prise en charge par ce navigateur. Vous pouvez écrire au clavier.";return;}
+ if(recognition){try{recognition.stop();}catch(e){}}
+ recognition=new SR();recognition.lang=({"Français":"fr-FR","English":"en-US","Español":"es-ES","Русский":"ru-RU","Créole haïtien":"fr-FR"})[$("prefLanguage").value]||"fr-FR";
+ recognition.interimResults=false;recognition.continuous=false;
+ $("voiceStatus").textContent="Écoute en cours… Parlez clairement.";
+ recognition.onresult=e=>{$("chatInput").value+=($("chatInput").value?" ":"")+e.results[0][0].transcript;$("voiceStatus").textContent="Dictée terminée. Relisez le texte avant de l’envoyer.";};
+ recognition.onerror=()=>{$("voiceStatus").textContent="La dictée n’a pas pu démarrer. Vérifiez l’autorisation du microphone.";};
+ recognition.onend=()=>{if($("voiceStatus").textContent==="Écoute en cours… Parlez clairement.")$("voiceStatus").textContent="Dictée terminée.";};
+ try{recognition.start();}catch(e){$("voiceStatus").textContent="Impossible de démarrer la dictée pour le moment.";}
+}
+function speakText(text){
+ if(!("speechSynthesis" in window)){toast("La lecture vocale n’est pas disponible dans ce navigateur.");return;}
+ speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang="fr-FR";speechSynthesis.speak(u);
+}
+function exportBackup(){
+ downloadFile("mot-juste-sauvegarde.json",JSON.stringify(data,null,2),"application/json;charset=utf-8");
+}
+function restoreBackup(file){
+ if(!file)return;const r=new FileReader();
+ r.onload=()=>{try{const obj=JSON.parse(String(r.result));if(!obj||!Array.isArray(obj.documents)||!Array.isArray(obj.projects)||!Array.isArray(obj.tasks))throw new Error("Format incorrect");data={...defaultData(),...obj,prefs:{...defaultData().prefs,...(obj.prefs||{})}};persist();renderHome();renderProjects();renderDocuments();toast("Sauvegarde restaurée.");}catch(e){toast("Sauvegarde invalide ou illisible.");}};
+ r.readAsText(file);
+}
 
-    <div id="toast" class="toast" role="status"></div>
+function initEvents(){
+ $("nav").addEventListener("click",e=>{
+  const b=e.target.closest("[data-page]");
+  if(b)navigate(b.dataset.page);
+ });
+ document.querySelectorAll("[data-goto]").forEach(b=>b.addEventListener("click",()=>navigate(b.dataset.goto)));
+ document.addEventListener("click",e=>{
+  const cat=e.target.closest("[data-category]");
+  if(cat){setCategory(cat.dataset.category);navigate("write");}
+  const quick=e.target.closest("[data-quick]");
+  if(quick){$("chatInput").value=quickActions[Number(quick.dataset.quick)]+" ";$("chatInput").focus();}
+  const open=e.target.closest("[data-open-doc]");
+  if(open){navigate("documents");openDocument(open.dataset.openDoc);}
+  const down=e.target.closest("[data-download-doc]");
+  if(down){const d=data.documents.find(x=>x.id===down.dataset.downloadDoc);if(d)downloadFile(safeName(d.title)+".txt",d.content);}
+  const delp=e.target.closest("[data-delete-project]");
+  if(delp&&confirm("Supprimer ce projet ? Les tâches associées resteront sans projet.")){
+   data.projects=data.projects.filter(p=>p.id!==delp.dataset.deleteProject);
+   data.tasks.forEach(t=>{if(t.projectId===delp.dataset.deleteProject)t.projectId="";});
+   persist();renderProjects();toast("Projet supprimé.");
+  }
+  const editp=e.target.closest("[data-edit-project]");
+  if(editp){
+   const p=data.projects.find(x=>x.id===editp.dataset.editProject);if(!p)return;
+   const name=prompt("Nom du projet :",p.name);if(name===null||!name.trim())return;
+   const description=prompt("Description :",p.description||"");if(description===null)return;
+   p.name=name.trim();p.description=description;persist();renderProjects();toast("Projet modifié.");
+  }
+  const delt=e.target.closest("[data-delete-task]");
+  if(delt){data.tasks=data.tasks.filter(t=>t.id!==delt.dataset.deleteTask);persist();renderProjects();toast("Tâche supprimée.");}
+  const restore=e.target.closest("[data-restore-version]");
+  if(restore){
+   const [id,index]=restore.dataset.restoreVersion.split(":");
+   const d=data.documents.find(x=>x.id===id),v=d?.versions?.[Number(index)];
+   if(d&&v){$("editDocContent").value=v.content;$("editDocTitle").value=d.title;toast("Version chargée dans l’éditeur. Enregistrez pour la conserver.");}
+  }
+ });
+ $("menuBtn").addEventListener("click",()=>$("sidebar").classList.toggle("open"));
+ $("sendBtn").addEventListener("click",sendMessage);
+ $("chatInput").addEventListener("keydown",e=>{if((e.ctrlKey||e.metaKey)&&e.key==="Enter")sendMessage();});
+ $("newChatBtn").addEventListener("click",()=>{
+  if(chatHistory.length&&!confirm("Commencer une nouvelle conversation ? Pensez à enregistrer les textes utiles."))return;
+  chatHistory=[];$("chatMessages").innerHTML="";
+  addBubble("assistant","Bonjour ! Choisissez un domaine, puis dites-moi librement ce que vous souhaitez rédiger ou améliorer. Vous pouvez préciser le ton, la longueur ou le public dans les options si vous le souhaitez.");
+ });
+ $("optionsBtn").addEventListener("click",()=>$("optionsPanel").classList.toggle("hidden"));
+ $("saveOptionsBtn").addEventListener("click",()=>{$("optionsStatus").textContent="Options appliquées à votre prochain message.";toast("Options prêtes.");});
+ $("clearInputBtn").addEventListener("click",()=>{$("chatInput").value="";$("chatInput").focus();});
+ $("dictateBtn").addEventListener("click",startDictation);
+ $("saveChatBtn").addEventListener("click",()=>{
+  const title=$("saveTitle").value.trim()||currentCategory.title+" — "+new Date().toLocaleDateString("fr-FR");
+  if(!lastResult){toast("Envoyez d’abord un message.");return;}
+  saveDocument(title,lastResult,{type:currentCategory.title});$("saveStatus").textContent="Document enregistré.";toast("Document enregistré.");
+ });
+ $("exportChatBtn").addEventListener("click",()=>lastResult?downloadFile("mot-juste-texte.txt",lastResult):toast("Aucun résultat à télécharger."));
+ $("addProjectBtn").addEventListener("click",createProject);
+ $("addTaskBtn").addEventListener("click",addTask);
+ $("taskText").addEventListener("keydown",e=>{if(e.key==="Enter")addTask();});
+ $("tasksList").addEventListener("change",e=>{
+  const id=e.target.dataset.taskDone;if(!id)return;
+  const t=data.tasks.find(x=>x.id===id);if(t){t.done=e.target.checked;persist();renderProjects();}
+ });
+ $("docSearch").addEventListener("input",renderDocuments);
+ $("closeDocEditor").addEventListener("click",()=>$("docEditor").classList.add("hidden"));
+ $("updateDocBtn").addEventListener("click",saveCurrentEditor);
+ $("compareVersionsBtn").addEventListener("click",()=>{
+  const d=data.documents.find(x=>x.id===currentDocId);if(!d)return;
+  const previous=d.versions?.[d.versions.length-1]?.content||"";
+  $("versionCompare").textContent=compareTexts(previous,$("editDocContent").value);
+  $("versionCompare").classList.remove("hidden");
+ });
+ $("downloadDocBtn").addEventListener("click",()=>downloadFile(safeName($("editDocTitle").value)+".txt",$("editDocContent").value));
+ $("deleteDocBtn").addEventListener("click",()=>{
+  if(!currentDocId||!confirm("Supprimer définitivement ce document et son historique ?"))return;
+  data.documents=data.documents.filter(d=>d.id!==currentDocId);currentDocId=null;persist();renderDocuments();renderHome();$("docEditor").classList.add("hidden");toast("Document supprimé.");
+ });
+ $("makeCVBtn").addEventListener("click",makeCV);
+ $("makeLetterBtn").addEventListener("click",makeLetter);
+ $("saveCVResult").addEventListener("click",()=>{const d=saveDocument("CV ou lettre", $("cvResult").value,{type:"CV / Lettre"});toast("Enregistré : "+d.title);});
+ $("downloadCVResult").addEventListener("click",()=>downloadFile("mot-juste-cv-lettre.txt",$("cvResult").value));
+ $("makeOutlineBtn").addEventListener("click",makeOutline);
+ $("saveThesisBtn").addEventListener("click",()=>{saveDocument($("thesisTitle").value||"Plan de recherche",$("thesisResult").value,{type:"Mémoire / Thèse"});toast("Plan enregistré.");});
+ $("fileInput").addEventListener("change",e=>readFile(e.target.files[0],"importContent","importTitle"));
+ $("importFromDocsBtn").addEventListener("click",()=>{navigate("import");$("fileInput").click();});
+ $("copyOriginalBtn").addEventListener("click",()=>{$("modifiedContent").value=$("importContent").value;toast("Texte copié dans la zone de modification.");});
+ $("saveOriginalBtn").addEventListener("click",()=>{
+  const text=$("importContent").value.trim();if(!text){toast("Importez ou collez d’abord un texte.");return;}
+  saveDocument($("importTitle").value||"Document original",text,{type:"Original importé"});toast("Original enregistré.");
+ });
+ $("downloadOriginalBtn").addEventListener("click",()=>downloadFile(safeName($("importTitle").value||"original")+".txt",$("importContent").value));
+ $("applyEditBtn").addEventListener("click",()=>{
+  const text=$("importContent").value.trim(),instruction=$("editInstruction").value.trim();
+  if(!text){toast("Importez ou collez d’abord un texte.");return;}
+  if(!instruction){toast("Décrivez la modification souhaitée.");return;}
+  $("modifiedContent").value=transformText(text,instruction,currentCategory);
+  toast("Une proposition locale a été préparée. Relisez-la.");
+ });
+ $("saveModifiedBtn").addEventListener("click",()=>{
+  if(!$("modifiedContent").value.trim()){toast("Aucun résultat à enregistrer.");return;}
+  saveDocument(($("importTitle").value||"Document")+" — version modifiée",$("modifiedContent").value,{type:"Version modifiée"});toast("Version modifiée enregistrée séparément.");
+ });
+ $("compareImportedBtn").addEventListener("click",()=>{
+  $("importCompare").textContent=compareTexts($("importContent").value,$("modifiedContent").value);
+  $("importCompare").classList.remove("hidden");
+ });
+ $("downloadModifiedBtn").addEventListener("click",()=>downloadFile(safeName($("importTitle").value||"document")+"-modifie.txt",$("modifiedContent").value));
+ $("organizeIdeasBtn").addEventListener("click",organizeIdeas);
+ $("saveIdeaBtn").addEventListener("click",()=>{if(!$("ideaResult").value.trim())organizeIdeas();saveDocument($("ideaTopic").value||"Notes et idées",$("ideaResult").value,{type:"Idées"});toast("Idées enregistrées.");});
+ $("downloadIdeaBtn").addEventListener("click",()=>downloadFile("mot-juste-idees.txt",$("ideaResult").value));
+ $("savePrefsBtn").addEventListener("click",()=>{
+  data.prefs={tone:$("prefTone").value,length:$("prefLength").value,language:$("prefLanguage").value,voice:$("prefVoice").checked};
+  persist();toast("Préférences enregistrées.");
+ });
+ $("exportBtn").addEventListener("click",exportBackup);
+ $("exportSettingsBtn").addEventListener("click",exportBackup);
+ $("backupInput").addEventListener("change",e=>restoreBackup(e.target.files[0]));
+ $("clearAllBtn").addEventListener("click",()=>{
+  if(!confirm("Effacer tous les projets, tâches et documents enregistrés sur cet appareil ? Exportez d’abord une sauvegarde si nécessaire."))return;
+  data=defaultData();persist();renderHome();renderProjects();renderDocuments();toast("Données locales effacées.");
+ });
+ $("accountInfoBtn").addEventListener("click",()=>{
+  $("accountPassword").value="";
+  $("accountNotice").textContent="Aucun compte n’a été créé. Pour activer les comptes, il faudra connecter un fournisseur d’authentification sécurisé et une base de données. Ne saisissez pas votre vrai mot de passe dans cette démonstration.";
+  $("accountNotice").classList.remove("hidden");
+ });
+ $("thesisTitle").addEventListener("keydown",e=>{if(e.key==="Enter")makeOutline();});
+ $("prefVoice").addEventListener("change",e=>{if(e.target.checked)toast("La lecture vocale peut dépendre du navigateur.");});
+ $("exportBtn").title="Télécharger une copie de vos données";
+ $("chatMessages").addEventListener("click",e=>{
+  const b=e.target.closest("[data-speak]");if(b)speakText(b.dataset.speak);
+ });
+}
+function init(){
+ renderCategories("homeCategories");
+ renderCategories("writeCategories");
+ renderQuickActions();
+ renderResearchChecklist();
+ $("prefTone").value=data.prefs.tone||"Selon le contexte";
+ $("prefLength").value=data.prefs.length||"Selon le besoin";
+ $("prefLanguage").value=data.prefs.language||"Français";
+ $("prefVoice").checked=!!data.prefs.voice;
+ $("chatMessages").innerHTML="";
+ addBubble("assistant","Bienvenue dans MOT JUSTE ! Choisissez une catégorie et décrivez votre besoin avec vos propres mots. Vous pouvez laisser les options vides. Enregistrez les résultats importants dans vos documents.");
+ initEvents();
+ renderHome();renderProjects();renderDocuments();setCategory("work");
+}
+document.addEventListener("DOMContentLoaded",init);
+</script>
+
 </body>
 </html>
+
