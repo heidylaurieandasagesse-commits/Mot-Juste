@@ -1,1 +1,315 @@
 
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#174c40">
+<title>MOT JUSTE</title>
+<style>
+:root{--g:#174c40;--g2:#26735e;--mint:#e5f3eb;--bg:#f3f6f3;--line:#dce5df;--text:#1d302b;--muted:#657770}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:15px/1.55 system-ui,sans-serif}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+header{background:var(--g);color:white;padding:20px 16px}
+header h1{margin:0;letter-spacing:2px}
+header p{margin:3px 0;color:#d6e9e1}
+main,footer,.head{max-width:1100px;margin:auto}
+main{padding:14px}
+nav{display:flex;gap:7px;overflow-x:auto;padding:0 0 14px}
+button{border:1px solid var(--line);border-radius:10px;padding:10px 13px;background:white;color:var(--text)}
+nav button.active,.primary{background:var(--g);color:white;border-color:var(--g)}
+.danger{color:#a33d3d}
+.soft{background:var(--mint)}
+.panel{background:white;border:1px solid var(--line);border-radius:15px;padding:16px;margin-bottom:14px;min-width:0}
+h2,h3{margin-top:0}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.layout{display:grid;grid-template-columns:230px minmax(0,1fr);gap:12px}
+.field{margin:12px 0}
+label{display:block;font-weight:650;margin-bottom:5px}
+input,textarea,select{width:100%;padding:11px;border:1px solid #cbd8d0;border-radius:9px;background:#fcfdfb;color:var(--text)}
+textarea{min-height:125px;resize:vertical}
+.small{min-height:80px}
+.help,.muted{font-size:13px;color:var(--muted)}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.stats{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+.stat{background:var(--mint);padding:7px 10px;border-radius:9px;font-size:13px}
+.warning{background:#fff3d9;padding:12px;border-radius:10px;margin:12px 0;font-size:13px}
+.status{background:var(--mint);padding:10px;border-radius:9px;margin-top:10px;white-space:pre-wrap}
+.list{display:grid;gap:8px}
+.item{border:1px solid var(--line);border-radius:10px;padding:10px;display:flex;gap:8px;justify-content:space-between;align-items:center}
+.hidden{display:none!important}
+.preview{background:#f7faf7;padding:12px;border-radius:9px;white-space:pre-wrap;overflow-wrap:anywhere}
+.check{display:flex;gap:8px;align-items:center}
+.check input{width:auto}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:20px}
+@media(max-width:700px){.grid,.layout{grid-template-columns:1fr}.panel{padding:13px}main{padding:9px}}
+@media print{header,nav,footer,.no-print{display:none!important}body{background:white}.panel{border:0}}
+</style>
+</head>
+<body>
+<header>
+<div class="head">
+<h1>✍️ MOT JUSTE</h1>
+<p>Les bonnes idées, les bons mots.</p>
+<p>Écrire · Organiser · Améliorer · Préserver sa voix</p>
+</div>
+</header>
+<main>
+<div class="warning"><b>Version de développement.</b> Les données restent dans le navigateur de cet appareil. Cette version ne possède pas encore de comptes sécurisés, de synchronisation cloud ni d'IA connectée. N'y conserve pas de données confidentielles.</div>
+
+<nav class="no-print">
+<button class="active" data-page="home">Accueil</button>
+<button data-page="write">Écriture</button>
+<button data-page="projects">Projets</button>
+<button data-page="library">Documents</button>
+<button data-page="cv">CV et lettres</button>
+<button data-page="academic">Mémoire et thèse</button>
+<button data-page="import">Importer</button>
+<button data-page="settings">Préférences</button>
+</nav>
+
+<section class="page" id="home">
+<div class="panel">
+<h2>Bienvenue dans MOT JUSTE 💚</h2>
+<p>Écris tes idées librement. Organise tes documents et prépare des textes plus clairs.</p>
+<div class="row">
+<button class="primary" data-go="write">Commencer à écrire</button>
+<button data-go="projects">Créer un projet</button>
+</div>
+<div class="stats">
+<span class="stat">Projets : <b id="projectCount">0</b></span>
+<span class="stat">Documents : <b id="docCount">0</b></span>
+<span class="stat">Mots : <b id="wordCount">0</b></span>
+</div>
+</div>
+<div class="panel"><h3>Documents récents</h3><div id="recent" class="list">Aucun document.</div></div>
+<div class="panel"><h3>Notre ambition</h3>
+<p>Un assistant d'écriture, de gestion documentaire et de recherche, avec protection de la vie privée, compte personnel, partage contrôlé et connexion aux outils de messagerie.</p>
+<p class="muted">Ces fonctions avancées nécessiteront un serveur sécurisé et des services spécialisés.</p></div>
+</section>
+
+<section class="page hidden" id="write">
+<div class="panel">
+<h2>Atelier d'écriture</h2>
+<div class="grid">
+<div class="field"><label for="title">Titre</label><input id="title" placeholder="Titre du document"></div>
+<div class="field"><label for="kind">Type</label><select id="kind">
+<option>Message personnel</option><option>E-mail</option><option>Lettre officielle</option><option>Rapport</option><option>Texte académique</option><option>Autre</option>
+</select></div>
+<div class="field"><label for="tone">Ton</label><select id="tone">
+<option value="natural">Naturel — garder ma voix</option><option value="formal">Formel</option><option value="warm">Chaleureux et respectueux</option><option value="direct">Direct et concis</option><option value="diplomatic">Diplomatique</option><option value="academic">Académique</option><option value="simple">Simple et clair</option>
+</select></div>
+<div class="field"><label for="length">Longueur</label><select id="length"><option value="normal">Normale</option><option value="short">Courte</option><option value="long">Plus détaillée</option></select></div>
+</div>
+<div class="field"><label for="intent">Objectif du texte</label><input id="intent" placeholder="Ex. demander une explication poliment"></div>
+<div class="field"><label for="original">Texte ou idées de départ</label><textarea id="original" placeholder="Écris ici, même si tes idées sont mélangées..."></textarea><p class="muted"><span id="wc">0</span> mots · <span id="cc">0</span> caractères</p></div>
+<div class="row no-print">
+<button class="primary" id="improve">Organiser le texte</button><button id="correct">Nettoyer</button><button id="dictate">🎙️ Dicter</button><button id="speak">🔊 Lire à voix haute</button>
+</div>
+<div class="field"><label for="result">Résultat modifiable</label><textarea id="result" placeholder="Le texte proposé apparaîtra ici..."></textarea></div>
+<div class="row no-print">
+<button class="primary" id="saveDoc">Enregistrer</button><button id="copy">Copier</button><button id="download">Exporter TXT</button><button id="print">Imprimer / PDF</button><button id="compare">Comparer</button>
+</div>
+<div id="comparison" class="grid hidden"><div><h3>Original</h3><div id="before" class="preview"></div></div><div><h3>Résultat</h3><div id="after" class="preview"></div></div></div>
+<div id="writeStatus" class="status hidden"></div>
+<div class="warning">L'amélioration actuelle repose sur des règles simples, pas sur une véritable IA. Vérifie le sens, la grammaire et le ton avant d'utiliser le texte.</div>
+</div>
+</section>
+
+<section class="page hidden" id="projects">
+<div class="layout">
+<div class="panel">
+<h2>Mes projets</h2>
+<div class="field"><label for="pname">Nom du projet</label><input id="pname" placeholder="Ex. Mémoire de recherche"></div>
+<div class="field"><label for="ptype">Catégorie</label><select id="ptype"><option>Projet personnel</option><option>Mémoire / thèse</option><option>CV / carrière</option><option>Correspondance</option><option>Recherche</option><option>Rapport</option><option>Autre</option></select></div>
+<button class="primary" id="createProject">+ Créer</button>
+<div id="projectList" class="list" style="margin-top:12px"></div>
+</div>
+<div class="panel">
+<h2 id="pheading">Sélectionne un projet</h2>
+<div class="field"><label for="instructions">Consignes</label><textarea id="instructions" class="small" placeholder="Objectif, ton, public..."></textarea></div>
+<div class="field"><label for="notes">Notes</label><textarea id="notes" placeholder="Idées et notes du projet"></textarea></div>
+<div class="field"><label for="task">Nouvelle tâche</label><input id="task" placeholder="Ex. vérifier les sources"><button id="addTask" style="margin-top:7px">Ajouter</button></div>
+<div id="tasks" class="list"></div>
+<div class="row"><button class="primary" id="saveProject">Enregistrer</button><button class="danger" id="deleteProject">Supprimer</button></div>
+<div id="projectStatus" class="status hidden"></div>
+</div>
+</div>
+</section>
+
+<section class="page hidden" id="library">
+<div class="panel">
+<h2>Documents</h2>
+<div class="grid">
+<div class="field"><label for="search">Rechercher</label><input id="search" placeholder="Titre ou mot du document"></div>
+<div class="field"><label for="filter">Projet</label><select id="filter"><option value="all">Tous les projets</option></select></div>
+</div>
+<div id="documents" class="list"></div>
+</div>
+</section>
+
+<section class="page hidden" id="cv">
+<div class="panel">
+<h2>CV et lettres</h2><p class="muted">Renseigne uniquement des informations exactes.</p>
+<div class="grid">
+<div class="field"><label for="cname">Nom</label><input id="cname"></div>
+<div class="field"><label for="contact">Coordonnées</label><input id="contact" placeholder="E-mail, téléphone, ville"></div>
+<div class="field"><label for="target">Poste ou programme visé</label><input id="target"></div>
+<div class="field"><label for="language">Langue</label><select id="language"><option>Français</option><option>English</option><option>Español</option></select></div>
+</div>
+<div class="field"><label for="education">Formation</label><textarea id="education"></textarea></div>
+<div class="field"><label for="experience">Expériences</label><textarea id="experience"></textarea></div>
+<div class="field"><label for="skills">Compétences et réalisations</label><textarea id="skills"></textarea></div>
+<div class="row"><button class="primary" id="makeCV">Préparer un CV</button><button id="makeLetter">Préparer une lettre</button></div>
+<div class="field"><label for="cvResult">Brouillon modifiable</label><textarea id="cvResult"></textarea></div>
+<div class="row"><button id="saveCV">Enregistrer</button><button id="copyCV">Copier</button><button id="exportCV">Exporter TXT</button></div>
+</div>
+</section>
+
+<section class="page hidden" id="academic">
+<div class="panel">
+<h2>Mémoire et thèse</h2>
+<div class="field"><label for="atitle">Titre du travail</label><input id="atitle"></div>
+<div class="field"><label for="atype">Type</label><select id="atype"><option>Mémoire</option><option>Thèse</option><option>Rapport</option><option>Article</option><option>Projet de recherche</option></select></div>
+<div class="field"><label for="question">Problématique</label><textarea id="question"></textarea></div>
+<div class="field"><label for="objectives">Objectifs</label><textarea id="objectives"></textarea></div>
+<div class="field"><label for="method">Méthodologie</label><textarea id="method"></textarea></div>
+<div class="field"><label for="sources">Références réellement consultées</label><textarea id="sources" placeholder="Auteur, titre, année, DOI ou URL..."></textarea></div>
+<button class="primary" id="makePlan">Préparer un plan</button>
+<div class="field"><label for="plan">Plan modifiable</label><textarea id="plan"></textarea></div>
+<div class="row"><button id="savePlan">Enregistrer</button><button id="exportPlan">Exporter TXT</button></div>
+<p class="muted">Ce modèle ne vérifie pas les références et n'invente pas de sources fiables : vérifie chaque référence toi-même.</p>
+</div>
+</section>
+
+<section class="page hidden" id="import">
+<div class="panel">
+<h2>Importer des fichiers</h2>
+<p class="muted">Cette version peut lire des fichiers texte simples. PDF, Word, images, scans et gros documents nécessiteront des modules supplémentaires.</p>
+<div class="field"><label for="files">Choisir des fichiers</label><input id="files" type="file" multiple accept=".txt,.md,.csv,.json,.html,.pdf,.docx,image/*"></div>
+<div id="importStatus" class="status">Aucun fichier importé.</div>
+<div class="field"><label for="importText">Texte importé ou notes</label><textarea id="importText"></textarea></div>
+<div class="row"><button id="sendWriter">Envoyer à l'atelier</button><button id="saveImport">Enregistrer</button><button id="exportImport">Exporter TXT</button></div>
+</div>
+</section>
+
+<section class="page hidden" id="settings">
+<div class="panel">
+<h2>Préférences d'écriture</h2>
+<div class="field"><label for="styleNotes">Comment préserver ma voix ?</label><textarea id="styleNotes" placeholder="Ex. garder mes expressions, éviter les phrases trop compliquées..."></textarea></div>
+<button class="primary" id="saveSettings">Enregistrer</button>
+</div>
+<div class="panel">
+<h2>Confidentialité et sauvegarde</h2>
+<p>Les données sont stockées dans le navigateur de cet appareil. Elles ne sont pas chiffrées par cette application et ne se synchronisent pas.</p>
+<p class="muted">Comptes, récupération d'accès, cloud, partage révocable, Gmail/Outlook et IA nécessitent une architecture serveur sécurisée. Les mots de passe de messagerie doivent être gérés par OAuth officiel. Ne mets jamais de clé secrète dans un dépôt public.</p>
+<div class="row"><button id="backup">Exporter toutes les données</button><button class="danger" id="erase">Effacer les données locales</button></div>
+<div id="settingsStatus" class="status hidden"></div>
+</div>
+</section>
+</main>
+<footer>MOT JUSTE · Prototype de développement · Vérifie toujours les textes avant utilisation.</footer>
+
+<script>
+"use strict";
+const $=id=>document.getElementById(id);
+const KEY="mot_juste_v2";
+const blank=()=>({projects:[],documents:[],active:null,settings:{styleNotes:""}});
+function load(){try{return Object.assign(blank(),JSON.parse(localStorage.getItem(KEY)||"{}"))}catch{return blank()}}
+let state=load(),active=state.active||null;
+function persist(){try{state.active=active;localStorage.setItem(KEY,JSON.stringify(state));refresh()}catch(e){alert("Sauvegarde impossible : stockage peut-être plein.")}}
+function id(){return Date.now().toString(36)+Math.random().toString(36).slice(2,8)}
+function countWords(s){return(s.trim().match(/\S+/g)||[]).length}
+function clean(s){return s.replace(/\r\n/g,"\n").replace(/[ \t]+/g," ").replace(/[ \t]*\n[ \t]*/g,"\n").replace(/\s+([,.;:!?])/g,"$1").replace(/([,;:!?])(?=\S)/g,"$1 ").trim()}
+function message(target,s){$(target).textContent=s;$(target).classList.remove("hidden")}
+function filename(s){return(s||"mot-juste").normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9_-]/gi,"-").toLowerCase().slice(0,60)}
+function download(name,content,type="text/plain;charset=utf-8"){const u=URL.createObjectURL(new Blob([content],{type}));const a=document.createElement("a");a.href=u;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),1000)}
+function go(page){document.querySelectorAll(".page").forEach(s=>s.classList.toggle("hidden",s.id!==page));document.querySelectorAll("nav [data-page]").forEach(b=>b.classList.toggle("active",b.dataset.page===page))}
+document.querySelectorAll("nav [data-page]").forEach(b=>b.addEventListener("click",()=>go(b.dataset.page)));
+document.querySelectorAll("[data-go]").forEach(b=>b.addEventListener("click",()=>go(b.dataset.go)));
+
+/* Atelier */
+$("original").addEventListener("input",()=>{$("wc").textContent=countWords($("original").value);$("cc").textContent=$("original").value.length});
+function improveText(){
+let t=clean($("original").value);if(!t)return "";
+const tone=$("tone").value,len=$("length").value,kind=$("kind").value;
+if(tone==="formal"||kind==="E-mail"||kind==="Lettre officielle"){
+t=t.replace(/\bje veux\b/gi,"je souhaite").replace(/\bsvp\b/gi,"s'il vous plaît").replace(/\bs'il te plaît\b/gi,"s'il vous plaît");
+}
+if(tone==="direct"||len==="short"){
+t=t.replace(/\ben fait\b/gi,"").replace(/\bjuste pour te dire que\b/gi,"").replace(/\bje voulais simplement te dire que\b/gi,"").replace(/[ \t]{2,}/g," ").trim();
+}
+if(len==="long")t+="\n\n[À compléter : ajoute des explications ou des exemples pertinents.]";
+const intent=$("intent").value.trim();
+if(intent)t="Objectif : "+intent+"\n\n"+t;
+if((kind==="E-mail"||kind==="Lettre officielle")&&!/^(bonjour|bonsoir|madame|monsieur)/i.test(t))t="Bonjour,\n\n"+t;
+if((kind==="E-mail"||kind==="Lettre officielle")&&!/(cordialement|salutations|respectueusement|bien à vous)/i.test(t))t+="\n\nCordialement,";
+return t;
+}
+$("improve").onclick=()=>{$("result").value=improveText();message("writeStatus","Brouillon local préparé. Relis et vérifie le résultat.")};
+$("correct").onclick=()=>{$("result").value=clean($("original").value);message("writeStatus","Nettoyage simple terminé.")};
+$("copy").onclick=async()=>{try{await navigator.clipboard.writeText($("result").value);message("writeStatus","Texte copié.")}catch{$("result").focus();$("result").select();message("writeStatus","Sélectionne le texte puis choisis Copier.")}};
+$("download").onclick=()=>download(filename($("title").value)+".txt",$("result").value);
+$("print").onclick=()=>window.print();
+$("compare").onclick=()=>{$("before").textContent=$("original").value;$("after").textContent=$("result").value;$("comparison").classList.remove("hidden")};
+$("speak").onclick=()=>{if(!("speechSynthesis"in window))return message("writeStatus","Lecture vocale indisponible dans ce navigateur.");speechSynthesis.cancel();let u=new SpeechSynthesisUtterance($("result").value||$("original").value);u.lang="fr-FR";speechSynthesis.speak(u)};
+$("dictate").onclick=()=>{const R=window.SpeechRecognition||window.webkitSpeechRecognition;if(!R)return message("writeStatus","Utilise le microphone du clavier Android.");const r=new R();r.lang="fr-FR";r.onresult=e=>{$("original").value+= " "+e.results[0][0].transcript;$("original").dispatchEvent(new Event("input"))};r.onerror=()=>message("writeStatus","Dictée interrompue ou microphone non autorisé.");r.start()};
+
+/* Projets et tâches */
+function project(){return state.projects.find(p=>p.id===active)||null}
+function loadProject(){const p=project();$("pheading").textContent=p?p.name:"Sélectionne un projet";$("instructions").value=p?p.instructions||"":"";$("notes").value=p?p.notes||"":"";renderTasks()}
+$("createProject").onclick=()=>{const name=$("pname").value.trim();if(!name)return alert("Donne un nom au projet.");const p={id:id(),name,type:$("ptype").value,instructions:"",notes:"",tasks:[],createdAt:new Date().toISOString()};state.projects.push(p);active=p.id;$("pname").value="";persist();loadProject()};
+$("saveProject").onclick=()=>{const p=project();if(!p)return message("projectStatus","Sélectionne un projet.");p.instructions=$("instructions").value;p.notes=$("notes").value;persist();message("projectStatus","Projet enregistré.")};
+$("deleteProject").onclick=()=>{const p=project();if(!p)return;if(!confirm("Supprimer ce projet ? Les documents associés seront conservés."))return;state.projects=state.projects.filter(x=>x.id!==p.id);active=null;persist();loadProject()};
+$("addTask").onclick=()=>{const p=project(),text=$("task").value.trim();if(!p)return alert("Sélectionne un projet.");if(!text)return;p.tasks.push({id:id(),text,done:false});$("task").value="";persist();renderTasks()};
+function renderTasks(){const box=$("tasks");box.replaceChildren();const p=project();if(!p||!p.tasks.length){box.textContent="Aucune tâche.";return}p.tasks.forEach(t=>{const row=document.createElement("div");row.className="item";const label=document.createElement("label");label.className="check";const cb=document.createElement("input");cb.type="checkbox";cb.checked=t.done;cb.onchange=()=>{t.done=cb.checked;persist();renderTasks()};const text=document.createElement("span");text.textContent=t.text;if(t.done)text.style.textDecoration="line-through";label.append(cb,text);const del=document.createElement("button");del.textContent="×";del.onclick=()=>{p.tasks=p.tasks.filter(x=>x.id!==t.id);persist();renderTasks()};row.append(label,del);box.append(row)})}
+
+/* Documents et versions */
+function saveDocument(title,content,kind="Texte"){
+if(!content.trim())return alert("Le document est vide.");
+title=title.trim()||"Document sans titre";
+let d=state.documents.find(x=>x.title===title&&x.projectId===active);
+const now=new Date().toISOString();
+if(d){d.versions=d.versions||[];d.versions.push({content:d.content,date:d.updatedAt||d.createdAt});d.content=content;d.updatedAt=now;d.kind=kind}
+else state.documents.push({id:id(),title,content,kind,projectId:active,createdAt:now,updatedAt:now,versions:[]});
+persist();
+}
+$("saveDoc").onclick=()=>{saveDocument($("title").value,$("result").value||$("original").value,$("kind").value);message("writeStatus","Document enregistré.")};
+function showVersions(d){if(!d.versions||!d.versions.length)return alert("Aucune ancienne version disponible.");const pick=prompt("Numéro de l'ancienne version :\n"+d.versions.map((v,i)=>(i+1)+". "+new Date(v.date).toLocaleString()).join("\n"));const n=Number(pick)-1;if(!Number.isInteger(n)||n<0||n>=d.versions.length)return;if(confirm("Charger cette version dans l'atelier ?")){$("title").value=d.title;$("original").value=d.versions[n].content;$("result").value=d.versions[n].content;$("original").dispatchEvent(new Event("input"));go("write")}}
+function renderProjects(){const box=$("projectList");box.replaceChildren();if(!state.projects.length)box.textContent="Aucun projet.";state.projects.forEach(p=>{const b=document.createElement("button");b.textContent=p.name+" · "+p.type;b.onclick=()=>{active=p.id;state.active=active;loadProject();persist()};box.append(b)});const f=$("filter"),old=f.value;f.replaceChildren();const all=document.createElement("option");all.value="all";all.textContent="Tous les projets";f.append(all);state.projects.forEach(p=>{const o=document.createElement("option");o.value=p.id;o.textContent=p.name;f.append(o)});f.value=[...f.options].some(o=>o.value===old)?old:"all"}
+function renderDocuments(){const box=$("documents");box.replaceChildren();const q=$("search").value.toLowerCase().trim(),f=$("filter").value;const docs=state.documents.filter(d=>(d.title+" "+d.content).toLowerCase().includes(q)&&(f==="all"||d.projectId===f));if(!docs.length){box.textContent="Aucun document correspondant.";return}docs.forEach(d=>{const row=document.createElement("div");row.className="item";row.style.alignItems="flex-start";const info=document.createElement("div");info.style.flex="1";const title=document.createElement("b");title.textContent=d.title;const meta=document.createElement("small");meta.className="muted";meta.textContent=(d.kind||"Document")+" · "+countWords(d.content)+" mots";info.append(title,document.createElement("br"),meta);const actions=document.createElement("div");actions.className="row";const open=document.createElement("button");open.textContent="Ouvrir";open.onclick=()=>{$("title").value=d.title;$("original").value=d.content;$("result").value=d.content;$("original").dispatchEvent(new Event("input"));go("write")};const exp=document.createElement("button");exp.textContent="TXT";exp.onclick=()=>download(filename(d.title)+".txt",d.content);const hist=document.createElement("button");hist.textContent="Versions";hist.onclick=()=>showVersions(d);const del=document.createElement("button");del.textContent="Supprimer";del.className="danger";del.onclick=()=>{if(confirm("Supprimer ce document et son historique ?")){state.documents=state.documents.filter(x=>x.id!==d.id);persist()}};actions.append(open,exp,hist,del);row.append(info,actions);box.append(row)})}
+$("search").oninput=renderDocuments;$("filter").onchange=renderDocuments;
+function refresh(){renderProjects();renderDocuments();$("projectCount").textContent=state.projects.length;$("docCount").textContent=state.documents.length;$("wordCount").textContent=state.documents.reduce((n,d)=>n+countWords(d.content),0);const box=$("recent");box.replaceChildren();const recent=[...state.documents].sort((a,b)=>new Date(b.updatedAt||b.createdAt)-new Date(a.updatedAt||a.createdAt)).slice(0,5);if(!recent.length)box.textContent="Aucun document.";recent.forEach(d=>{const b=document.createElement("button");b.textContent=d.title;b.onclick=()=>{$("title").value=d.title;$("original").value=d.content;$("result").value=d.content;$("original").dispatchEvent(new Event("input"));go("write")};box.append(b)})}
+
+/* CV et lettres */
+function cvData(){return {name:$("cname").value.trim(),contact:$("contact").value.trim(),target:$("target").value.trim(),education:$("education").value.trim(),experience:$("experience").value.trim(),skills:$("skills").value.trim()}}
+$("makeCV").onclick=()=>{const d=cvData();$("cvResult").value=`CURRICULUM VITAE\n\n${d.name}\n${d.contact}\n\nOBJECTIF\n${d.target}\n\nFORMATION\n${d.education}\n\nEXPÉRIENCES\n${d.experience}\n\nCOMPÉTENCES ET RÉALISATIONS\n${d.skills}`.trim()};
+$("makeLetter").onclick=()=>{const d=cvData();$("cvResult").value=`Madame, Monsieur,\n\nJe vous adresse ma candidature pour ${d.target||"[poste ou programme visé]"}.\n\n${d.education?"Ma formation : "+d.education+"\n\n":""}${d.experience?"Mon expérience : "+d.experience+"\n\n":""}${d.skills?"Mes compétences : "+d.skills+"\n\n":""}Je reste à votre disposition pour tout renseignement complémentaire.\n\nJe vous prie d'agréer, Madame, Monsieur, mes salutations distinguées.\n\n${d.name}\n${d.contact}`.trim()};
+$("saveCV").onclick=()=>saveDocument($("target").value||"CV ou lettre",$("cvResult").value,"CV / lettre");
+$("copyCV").onclick=async()=>{try{await navigator.clipboard.writeText($("cvResult").value);alert("Texte copié.")}catch{$("cvResult").select();alert("Sélectionne le texte et copie-le.")}};
+$("exportCV").onclick=()=>download("cv-ou-lettre.txt",$("cvResult").value);
+
+/* Plan académique */
+$("makePlan").onclick=()=>{$("plan").value=`${$("atitle").value||"Titre à définir"}\n\nTYPE : ${$("atype").value}\n\nINTRODUCTION\n- Présentation et contexte\n- Justification du sujet\n- Problématique : ${$("question").value||"[À préciser]"}\n- Objectifs : ${$("objectives").value||"[À préciser]"}\n\nPARTIE I — CADRE THÉORIQUE\n- Concepts clés\n- État des connaissances\n- Travaux antérieurs\n\nPARTIE II — MÉTHODOLOGIE\n${$("method").value||"[À préciser]"}\n\nPARTIE III — RÉSULTATS ET DISCUSSION\n- Résultats\n- Analyse et interprétation\n- Limites\n\nCONCLUSION\n- Réponse à la problématique\n- Résultats essentiels\n- Perspectives\n\nRÉFÉRENCES À VÉRIFIER\n${$("sources").value||"[Ajouter les sources consultées]"}\n\nANNEXES\n- À déterminer.`};
+$("savePlan").onclick=()=>saveDocument($("atitle").value||"Plan académique",$("plan").value,"Plan académique");
+$("exportPlan").onclick=()=>download("plan-academique.txt",$("plan").value);
+
+/* Import */
+$("files").onchange=async e=>{const files=[...e.target.files];let out=[],warnings=[];for(const f of files){const ext=f.name.split(".").pop().toLowerCase();if(["txt","md","csv","json","html"].includes(ext)){try{out.push("--- "+f.name+" ---\n"+await f.text())}catch{warnings.push(f.name+": lecture impossible")}}else warnings.push(f.name+": lecture avancée non disponible dans cette version")}if(out.length)$("importText").value=[$("importText").value,...out].filter(Boolean).join("\n\n");$("importStatus").textContent=files.length+" fichier(s) sélectionné(s).\n"+warnings.join("\n")};
+$("sendWriter").onclick=()=>{$("original").value=$("importText").value;$("original").dispatchEvent(new Event("input"));go("write")};
+$("saveImport").onclick=()=>saveDocument("Document importé",$("importText").value,"Import");
+$("exportImport").onclick=()=>download("document-importe.txt",$("importText").value);
+
+/* Préférences, sauvegarde, effacement */
+$("styleNotes").value=state.settings.styleNotes||"";
+$("saveSettings").onclick=()=>{state.settings.styleNotes=$("styleNotes").value;persist();message("settingsStatus","Préférences enregistrées sur cet appareil.")};
+$("backup").onclick=()=>download("mot-juste-sauvegarde.json",JSON.stringify(state,null,2),"application/json;charset=utf-8");
+$("erase").onclick=()=>{if(!confirm("Effacer tous les projets, documents et préférences locales ? Cette action est irréversible."))return;state=blank();active=null;persist();loadProject();$("styleNotes").value="";message("settingsStatus","Données locales effacées.")};
+
+loadProject();
+refresh();
+</script>
+</body>
+</html>
